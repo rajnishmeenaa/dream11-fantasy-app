@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Dream11.Admin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/admin_primary</item>
+        <item name="colorPrimaryDark">@color/admin_slate</item>
+        <item name="android:statusBarColor">@color/admin_slate</item>
+        <item name="android:navigationBarColor">@color/admin_slate</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

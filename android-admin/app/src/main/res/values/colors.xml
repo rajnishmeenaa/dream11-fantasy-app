@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="admin_slate">#0F172A</color>
+    <color name="admin_primary">#DC2626</color>
+    <color name="white">#FFFFFF</color>
+</resources>

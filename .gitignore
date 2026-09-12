@@ -1,27 +1,18 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.log
-venv/
-.venv/
-env/
-
-# Android / Gradle
+# Android & Gradle
 .gradle/
 build/
 */build/
 */*/build/
+*.apk
+*.aab
 local.properties
-.idea/
-*.iml
-.DS_Store
 
-# Temporary scripts
-gen_part*.py
-write_*.py
-make_*.py
-clean_*.py
-verify_*.py
-test_*.py
-find_git.py
+# Python
+__pycache__/
+*.pyc
+.venv/
+inspect_*.py
+
+# OS
+.DS_Store
+Thumbs.db
