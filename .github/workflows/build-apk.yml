@@ -29,26 +29,32 @@ jobs:
       - name: Build Fantasy11 User APK
         run: |
           cd android/fantasy11-user-app
-          chmod +x gradlew || gradle wrapper
+          if [ ! -f "gradlew" ]; then
+            gradle wrapper --gradle-version 8.2.2
+          fi
+          chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
 
       # Build Admin App
       - name: Build Fantasy11 Admin Console APK
         run: |
           cd android/fantasy11-admin-app
-          chmod +x gradlew || gradle wrapper
+          if [ ! -f "gradlew" ]; then
+            gradle wrapper --gradle-version 8.2.2
+          fi
+          chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
 
       # Archive and Upload User APK
       - name: Upload Fantasy11 Player APK
         uses: actions/upload-artifact@v4
         with:
-          name: fantasy11-player-app-debug.apk
+          name: fantasy11-player-app-debug
           path: android/fantasy11-user-app/app/build/outputs/apk/debug/*.apk
 
       # Archive and Upload Admin APK
       - name: Upload Fantasy11 Admin Console APK
         uses: actions/upload-artifact@v4
         with:
-          name: fantasy11-admin-console-debug.apk
+          name: fantasy11-admin-console-debug
           path: android/fantasy11-admin-app/app/build/outputs/apk/debug/*.apk
