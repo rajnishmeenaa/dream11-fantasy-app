@@ -1,27 +1,29 @@
 
 :root {
-  --primary: #D11A2A;
-  --primary-dark: #991b1b;
-  --primary-light: #ef4444;
-  --primary-gradient: linear-gradient(135deg, #b91c1c 0%, #D11A2A 50%, #e11d48 100%);
-  --dark-header: #111827;
-  --dark-bg: #0f172a;
+  --primary: #ef4444;
+  --primary-dark: #dc2626;
+  --primary-light: #f87171;
+  --primary-gradient: linear-gradient(135deg, #b91c1c 0%, #ef4444 50%, #f43f5e 100%);
+  --dark-header: #080c14;
+  --dark-bg: #070b12;
   --pitch-green: #15803d;
-  --pitch-turf: linear-gradient(180deg, #166534 0%, #15803d 40%, #166534 100%);
+  --pitch-turf: linear-gradient(180deg, #14532d 0%, #15803d 40%, #14532d 100%);
   --gold: #f59e0b;
   --gold-gradient: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --card-bg: #ffffff;
-  --page-bg: #f1f5f9;
-  --border-light: #e2e8f0;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --card-bg: #0f172a;
+  --card-elevated: #141e33;
+  --page-bg: #070b12;
+  --border-light: #1e293b;
+  --border-glow: rgba(239, 68, 68, 0.3);
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.8);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -1295,4 +1297,490 @@ body { background-color: #0b0f19; color: var(--text-main); display: flex; justif
 }
 .btn-sms-action:hover {
   transform: scale(1.04);
+}
+
+
+/* =========================================================================
+   LUXURY DARK MODE STYLING & NEON ACCENTS (OLED #070b12)
+   ========================================================================= */
+
+body {
+  background-color: #04070d !important;
+  color: var(--text-main) !important;
+}
+
+.mobile-frame {
+  background-color: #070b12 !important;
+  border-color: #1e293b !important;
+  box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9), 0 0 25px rgba(239, 68, 68, 0.12) !important;
+}
+
+.app-header {
+  background: rgba(8, 12, 20, 0.97) !important;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.sports-nav {
+  background: #080c14 !important;
+  border-bottom: 1px solid #1e293b !important;
+}
+
+.sport-tab {
+  color: #94a3b8 !important;
+}
+
+.sport-tab.active {
+  color: #ffffff !important;
+  border-bottom-color: #ef4444 !important;
+}
+
+.content-scroll {
+  background-color: #070b12 !important;
+}
+
+/* Match Cards */
+.match-card {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+}
+
+.match-card:hover {
+  border-color: #ef4444 !important;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.15) !important;
+}
+
+.match-card-header {
+  background: #141e33 !important;
+  border-bottom: 1px solid #1e293b !important;
+  color: #cbd5e1 !important;
+}
+
+.team-logo-circle {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+}
+
+.match-timer-pill {
+  background: rgba(239, 68, 68, 0.18) !important;
+  color: #f87171 !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+.match-card-footer {
+  background: #0b0f19 !important;
+  border-top: 1px dashed #1e293b !important;
+}
+
+.mega-prize-tag {
+  color: #fbbf24 !important;
+}
+
+/* Filter Chips */
+.filter-chip {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.filter-chip.active {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Contests */
+.match-info-card {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.mic-pitch-report {
+  border-top-color: #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.sub-tabs-bar {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.sub-tab {
+  color: #94a3b8 !important;
+}
+
+.sub-tab.active {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+.type-pill {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.type-pill.active {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+.contest-card {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+.c-pool-meta .c-type-badge {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+}
+
+.spots-progress-track {
+  background: #1e293b !important;
+}
+
+.spots-progress-fill {
+  background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%) !important;
+}
+
+.contest-card-footer {
+  background: #141e33 !important;
+  border-top: 1px solid #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.first-prize-tag {
+  color: #fbbf24 !important;
+}
+
+.guaranteed-tag {
+  background: rgba(56, 189, 248, 0.15) !important;
+  color: #38bdf8 !important;
+}
+
+/* Team Builder */
+.team-summary-bar {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.team-breakdown-pill {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.position-tabs-bar {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.pos-tab {
+  color: #94a3b8 !important;
+}
+
+.pos-tab.active {
+  color: #ef4444 !important;
+  border-bottom-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+}
+
+.player-list-container {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.table-head {
+  background: #141e33 !important;
+  border-bottom: 1px solid #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.player-row {
+  border-bottom: 1px solid #1e293b !important;
+}
+
+.player-row:hover {
+  background: #141e33 !important;
+}
+
+.player-row.selected {
+  background: rgba(239, 68, 68, 0.12) !important;
+  border-left: 4px solid #ef4444 !important;
+}
+
+.p-avatar {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.p-team-badge {
+  background: #1e293b !important;
+  color: #cbd5e1 !important;
+}
+
+.btn-toggle-player {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #34d399 !important;
+}
+
+.floating-team-footer {
+  background: rgba(8, 12, 20, 0.95) !important;
+  border-top: 1px solid #1e293b !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.btn-secondary {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* Captain / Vice-Captain Selector */
+.cvc-box {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.cvc-table-container {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.cvc-table-head {
+  background: #141e33 !important;
+  border-bottom: 1px solid #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.cvc-row {
+  border-bottom: 1px solid #1e293b !important;
+}
+
+.btn-cvc-toggle {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+/* Modals & Drawers */
+.bottom-sheet-modal {
+  background: #0d1424 !important;
+  border-top: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.sheet-handle {
+  background: #334155 !important;
+}
+
+.sheet-close-btn {
+  background: #1e293b !important;
+  color: #cbd5e1 !important;
+}
+
+.pb-stats-bar {
+  background: #141e33 !important;
+  color: #cbd5e1 !important;
+}
+
+.pb-row {
+  border-bottom: 1px solid #1e293b !important;
+}
+
+.pb-row:first-child {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #fbbf24 !important;
+}
+
+.join-contest-summary {
+  background: #141e33 !important;
+  border: 1px solid #1e293b !important;
+}
+
+.team-picker-option {
+  background: #0f172a !important;
+  border-color: #1e293b !important;
+}
+
+.team-picker-option.selected {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+}
+
+.payment-breakdown-box {
+  background: #141e33 !important;
+  border: 1px solid #1e293b !important;
+}
+
+.pay-row.total {
+  border-top: 1px dashed #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* Wallet & UPI */
+.w-break-item {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.btn-withdraw-small {
+  background: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+.btn-amt {
+  background: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.btn-amt.active {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #ef4444 !important;
+}
+
+.custom-amt-row input {
+  background: #070b12 !important;
+  border: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.upi-method-card {
+  background: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.upi-method-card.selected {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+}
+
+.upi-qr-panel {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.receipt-card {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.receipt-details {
+  border-bottom-color: #334155 !important;
+}
+
+.receipt-footer-stamp {
+  background: #141e33 !important;
+  color: #94a3b8 !important;
+}
+
+/* 6-Box OTP Input */
+.otp-box {
+  background: #070b12 !important;
+  border: 2px solid #334155 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+}
+
+.otp-box:focus {
+  border-color: #ef4444 !important;
+  background: #0b0f19 !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.45) !important;
+}
+
+.otp-box.filled {
+  border-color: #f59e0b !important;
+  background: #0f172a !important;
+  color: #fbbf24 !important;
+}
+
+/* Commentary & Leaderboard */
+.commentary-item {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.comm-ball-badge.dot {
+  background: #1e293b !important;
+  color: #94a3b8 !important;
+  border-color: #334155 !important;
+}
+
+.lb-row {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.lb-row.user-row {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border: 1.5px solid #f59e0b !important;
+}
+
+.sim-controls-panel {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.sim-btn-step {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.sim-btn-reset {
+  background: #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+/* Points System & Profile */
+.points-system-card {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.ps-item {
+  background: #141e33 !important;
+  color: #f8fafc !important;
+}
+
+.pstat-card {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+.profile-menu-item {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+}
+
+.profile-menu-item:hover {
+  background: #141e33 !important;
+}
+
+/* Bottom Navigation */
+.app-bottom-nav {
+  background: rgba(8, 12, 20, 0.98) !important;
+  border-top: 1px solid #1e293b !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.nav-item {
+  color: #94a3b8 !important;
+}
+
+.nav-item.active {
+  color: #ef4444 !important;
+}
+
+/* Floating Create Team Bar */
+.floating-contest-bar {
+  background: linear-gradient(180deg, rgba(7,11,18,0) 0%, rgba(7,11,18,0.95) 40%) !important;
 }
