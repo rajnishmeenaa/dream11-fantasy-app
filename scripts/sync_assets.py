@@ -15,14 +15,14 @@ os.makedirs(player_assets, exist_ok=True)
 os.makedirs(admin_assets, exist_ok=True)
 
 # Player App: Zero Admin
-player_files = ['index.html', 'styles.css', 'app.js', 'manifest.json', 'sw.js']
+player_files = ['index.html', 'styles.css', 'app.js', 'manifest.json', 'sw.js', 'mock.js']
 for pf in player_files:
     s = os.path.join(src_dir, pf)
     if os.path.exists(s):
         shutil.copy2(s, os.path.join(player_assets, pf))
 
 # Admin App: Only Admin Console files
-admin_files = ['admin.html', 'admin.css', 'admin.js', 'manifest-admin.json', 'styles.css']
+admin_files = ['admin.html', 'admin.css', 'admin.js', 'manifest-admin.json', 'styles.css', 'mock.js']
 for af in admin_files:
     s = os.path.join(src_dir, af)
     if os.path.exists(s):
