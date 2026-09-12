@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.Fantasy11Admin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/admin_gold</item>
+        <item name="android:statusBarColor">#0B0F19</item>
+    </style>
+</resources>
