@@ -313,7 +313,44 @@ async function initApp() {
 }
 
 // Update User Header Info
+
+// Dream11 Left Sliding Profile Drawer Controls
+function openDrawer() {
+  const drawer = document.getElementById('side-drawer');
+  const overlay = document.getElementById('drawer-overlay');
+  if (drawer) drawer.classList.add('open');
+  if (overlay) {
+    overlay.classList.remove('hidden');
+    overlay.classList.add('open');
+  }
+  updateDrawerUser();
+}
+
+function closeDrawer() {
+  const drawer = document.getElementById('side-drawer');
+  const overlay = document.getElementById('drawer-overlay');
+  if (drawer) drawer.classList.remove('open');
+  if (overlay) {
+    overlay.classList.remove('open');
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+  }
+}
+
+function updateDrawerUser() {
+  if (!state.user) return;
+  const totalBalance = (state.user.wallet.deposited || 0) + (state.user.wallet.winnings || 0) + (state.user.wallet.bonus || 0);
+  const dWalletAmt = document.getElementById('drawer-wallet-amount');
+  if (dWalletAmt) dWalletAmt.textContent = `₹${totalBalance.toLocaleString('en-IN')}`;
+  const dWin = document.getElementById('drawer-w-winnings');
+  if (dWin) dWin.textContent = `₹${(state.user.wallet.winnings || 0).toLocaleString('en-IN')}`;
+  const dDep = document.getElementById('drawer-w-deposited');
+  if (dDep) dDep.textContent = `₹${(state.user.wallet.deposited || 0).toLocaleString('en-IN')}`;
+  const dBon = document.getElementById('drawer-w-bonus');
+  if (dBon) dBon.textContent = `₹${(state.user.wallet.bonus || 0).toLocaleString('en-IN')}`;
+}
+
 function updateUserHeader() {
+  updateDrawerUser();
   if (!state.user) return;
   const totalBalance = (state.user.wallet.deposited || 0) + (state.user.wallet.winnings || 0) + (state.user.wallet.bonus || 0);
   document.getElementById('header-wallet-amount').textContent = `₹${totalBalance.toLocaleString('en-IN')}`;
@@ -1089,7 +1126,7 @@ function renderMyTeamsTab() {
 
 // Render My Contests Tab
 function renderMyContestsTab() {
-  const container = document.getElementById('my-joined-contests-container');
+  const container = document.getElementById('my-contests-container');
   if (!container) return;
   container.innerHTML = '';
   document.getElementById('tab-my-contests').textContent = `My Contests (${state.joinedContests.length})`;
@@ -1607,11 +1644,165 @@ async function openJoinPrivateModal(code) {
 function setupEventListeners() {
   // Navigation
   document.getElementById('nav-logo-home')?.addEventListener('click', () => switchView('view-home'));
-  document.getElementById('btn-menu')?.addEventListener('click', () => switchView('view-profile'));
+  document.getElementById('btn-menu')?.addEventListener('click', openDrawer);
   document.getElementById('btn-back-to-home')?.addEventListener('click', () => switchView('view-home'));
   document.getElementById('btn-back-to-contests')?.addEventListener('click', () => switchView('view-contests'));
   document.getElementById('btn-back-to-team-create')?.addEventListener('click', () => switchView('view-create-team'));
   document.getElementById('btn-back-from-live')?.addEventListener('click', () => switchView('view-my-matches'));
+
+  // Dream11 Left Sliding Profile Drawer Listeners
+  document.getElementById('btn-close-drawer')?.addEventListener('click', closeDrawer);
+  document.getElementById('drawer-overlay')?.addEventListener('click', closeDrawer);
+
+  document.getElementById('d-menu-matches')?.addEventListener('click', () => {
+    closeDrawer();
+    renderMyMatchesView();
+    switchView('view-my-matches');
+  });
+
+  document.getElementById('d-menu-rewards')?.addEventListener('click', () => {
+    closeDrawer();
+    switchView('view-rewards');
+  });
+
+  document.getElementById('d-menu-chat')?.addEventListener('click', () => {
+    closeDrawer();
+    switchView('view-chat-groups');
+  });
+
+  document.getElementById('d-menu-winners')?.addEventListener('click', () => {
+    closeDrawer();
+    switchView('view-winners');
+  });
+
+  document.getElementById('d-menu-invite')?.addEventListener('click', () => {
+    closeDrawer();
+    const shareModal = document.getElementById('modal-private-code-share');
+    if (shareModal) {
+      const codeSpan = document.getElementById('share-modal-code');
+      if (codeSpan) codeSpan.textContent = 'DREAM11WIN';
+      shareModal.classList.remove('hidden');
+    } else {
+      showToast('Invite Friends: Share code DREAM11WIN & earn ₹500 cash bonus!', 'success');
+    }
+  });
+
+  document.getElementById('d-menu-champions')?.addEventListener('click', () => {
+    closeDrawer();
+    showToast('👑 Champions Club: VIP Level 45 Pro status active! 0% platform fee.', 'success');
+  });
+
+  document.getElementById('d-menu-points')?.addEventListener('click', () => {
+    closeDrawer();
+    switchView('view-rewards');
+    setTimeout(() => {
+      document.querySelector('.points-system-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  });
+
+  document.getElementById('d-menu-fairplay')?.addEventListener('click', () => {
+    closeDrawer();
+    showToast('🛡️ 100% Fair Play: Certified by Supreme Court of India as Game of Skill', 'success');
+  });
+
+  document.getElementById('d-menu-settings')?.addEventListener('click', () => {
+    closeDrawer();
+    showToast('⚙️ Settings: Stadium Crowd Audio & Lineup Push Alerts are ON', 'success');
+  });
+
+  document.getElementById('d-menu-help')?.addEventListener('click', () => {
+    closeDrawer();
+    showToast('🎧 24x7 Help Desk: Connecting you to official Dream11 support...', 'success');
+  });
+
+  document.getElementById('btn-drawer-add-cash')?.addEventListener('click', () => {
+    closeDrawer();
+    document.getElementById('modal-wallet')?.classList.remove('hidden');
+    document.querySelector('.w-nav-tab[data-wtab="deposit"]')?.click();
+  });
+
+  document.getElementById('btn-drawer-withdraw')?.addEventListener('click', () => {
+    closeDrawer();
+    document.getElementById('modal-wallet')?.classList.remove('hidden');
+    document.querySelector('.w-nav-tab[data-wtab="withdraw"]')?.click();
+  });
+
+  // Header Bell & Help
+  document.getElementById('btn-header-bell')?.addEventListener('click', () => {
+    showToast('🔔 Lineups Out for MI vs CSK! Playing XI announced with toss update.', 'success');
+  });
+
+  document.getElementById('btn-header-help')?.addEventListener('click', () => {
+    showToast('🎧 24x7 Dream11 Live Chat Support is online.', 'success');
+  });
+
+  // Home Banner Join
+  document.getElementById('btn-home-banner-join')?.addEventListener('click', () => {
+    if (state.matches && state.matches.length > 0) {
+      selectMatch(state.matches[0].id);
+    }
+  });
+
+  // Chat & Groups View Listeners
+  document.getElementById('btn-chat-join-code')?.addEventListener('click', () => {
+    const code = document.getElementById('input-chat-invite-code')?.value.trim();
+    if (!code) {
+      showToast('Please enter an invite code (e.g. F11-MI-CSK)', 'error');
+      return;
+    }
+    showToast(`Successfully joined private contest with code ${code}!`, 'success');
+    const inp = document.getElementById('input-chat-invite-code');
+    if (inp) inp.value = '';
+    renderMyMatchesView();
+    switchView('view-my-matches');
+  });
+
+  document.getElementById('btn-chat-create-private')?.addEventListener('click', () => {
+    document.getElementById('modal-create-private-contest')?.classList.remove('hidden');
+  });
+
+  // Live Fan Chat Sender
+  const sendChatMsg = () => {
+    const input = document.getElementById('input-chat-send');
+    const container = document.getElementById('chat-messages-container');
+    if (!input || !container) return;
+    const txt = input.value.trim();
+    if (!txt) return;
+
+    const msgEl = document.createElement('div');
+    msgEl.className = 'chat-msg user-msg';
+    msgEl.innerHTML = `
+      <span class="chat-user">You:</span>
+      <span class="chat-bubble">${txt}</span>
+    `;
+    container.appendChild(msgEl);
+    input.value = '';
+    container.scrollTop = container.scrollHeight;
+
+    setTimeout(() => {
+      const respEl = document.createElement('div');
+      respEl.className = 'chat-msg';
+      const answers = [
+        "Boom! 🔥 Great fantasy prediction!",
+        "Agreed, captain pick is crucial today! 🏏",
+        "Lineups just confirmed bowling first, bowlers get extra swing!",
+        "Let's win the Mega Contest! 🏆"
+      ];
+      const randomAns = answers[Math.floor(Math.random() * answers.length)];
+      respEl.innerHTML = `
+        <span class="chat-user">@expert_kunal:</span>
+        <span class="chat-bubble">${randomAns}</span>
+      `;
+      container.appendChild(respEl);
+      container.scrollTop = container.scrollHeight;
+    }, 1200);
+  };
+
+  document.getElementById('btn-chat-send')?.addEventListener('click', sendChatMsg);
+  document.getElementById('input-chat-send')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendChatMsg();
+  });
+
 
   // Bottom Nav items
   document.querySelectorAll('.app-bottom-nav .nav-item').forEach(item => {
