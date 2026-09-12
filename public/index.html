@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app-wrapper">
@@ -37,8 +37,38 @@
             <div class="user-avatar-badge" id="header-avatar">🏏</div>
           </button>
           <div class="logo-container" id="nav-logo-home">
-            <span class="brand-d">F</span>
-            <span class="brand-text">FANTASY11</span>
+            <div class="brand-emblem">
+              <svg class="brand-shield-svg" viewBox="0 0 40 40" width="34" height="34" fill="none">
+                <defs>
+                  <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ef4444" />
+                    <stop offset="50%" stop-color="#dc2626" />
+                    <stop offset="100%" stop-color="#f59e0b" />
+                  </linearGradient>
+                  <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="100%" stop-color="#fde047" />
+                  </linearGradient>
+                  <filter id="shieldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#ef4444" flood-opacity="0.6"/>
+                  </filter>
+                </defs>
+                <!-- Hexagonal Shield Outer -->
+                <polygon points="20,2 36,9 36,25 20,38 4,25 4,9" fill="url(#shieldGrad)" filter="url(#shieldGlow)"/>
+                <polygon points="20,5 33,11 33,23 20,34 7,23 7,11" fill="#070b12" opacity="0.94"/>
+                <!-- Stylized Winged F -->
+                <path d="M12,13 h14 v3.5 h-10 v4 h8 v3.5 h-8 v8 h-4 z" fill="url(#wingGrad)" />
+                <!-- Electric 11 Lightning -->
+                <polygon points="25,13 29,13 26,23 30,23 23,34 25,25 21,25" fill="#f59e0b" />
+              </svg>
+            </div>
+            <div class="brand-text-col">
+              <div class="brand-title-row">
+                <span class="brand-text-fantasy">FANTASY</span>
+                <span class="brand-text-eleven">11</span>
+              </div>
+              <span class="brand-sub-badge">PRO SPORTS LEAGUE</span>
+            </div>
           </div>
         </div>
         
