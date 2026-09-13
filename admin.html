@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Fantasy11 Admin Console - Control & Live God Mode</title>
+  <link rel="manifest" href="manifest-admin.json">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <div class="admin-wrapper">
+    <div class="admin-app-frame">
+      
+      <!-- Executive Header -->
+      <header class="admin-header">
+        <div class="header-branding">
+          <div class="admin-badge-icon">⚡</div>
+          <div>
+            <div class="brand-row">
+              <span class="brand-title">FANTASY11</span>
+              <span class="admin-pill-tag">ADMIN CONSOLE</span>
+            </div>
+            <div class="server-status-row">
+              <span class="status-dot online"></span>
+              <span class="server-label">Server: Online (Port 8000)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-refresh-state" class="btn-icon-pill" title="Refresh Live State">
+            🔄 <span class="hide-mobile">Sync</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Telemetry Dashboard Metrics Bar -->
+      <section class="telemetry-bar">
+        <div class="telemetry-card">
+          <span class="telem-label">ACTIVE CONTESTS</span>
+          <span class="telem-value" id="telem-contests">0</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telem-label">SCHEDULED MATCHES</span>
+          <span class="telem-value" id="telem-matches">0</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telem-label">USER TOTAL FUNDS</span>
+          <span class="telem-value highlight" id="telem-wallet">₹0</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telem-label">LIVE MATCH SCORE</span>
+          <span class="telem-value live" id="telem-score">AUS 0/0 (0.0)</span>
+        </div>
+      </section>
+
+      <!-- Navigation Tabs -->
+      <nav class="admin-tabs">
+        <button class="adm-tab-btn active" data-tab="contests">
+          <span class="tab-icon">🏆</span>
+          <span class="tab-text">Contests</span>
+        </button>
+        <button class="adm-tab-btn" data-tab="fixtures">
+          <span class="tab-icon">🏏</span>
+          <span class="tab-text">Fixtures</span>
+        </button>
+        <button class="adm-tab-btn" data-tab="wallet">
+          <span class="tab-icon">💰</span>
+          <span class="tab-text">Wallet & Ledger</span>
+        </button>
+        <button class="adm-tab-btn" data-tab="godmode">
+          <span class="tab-icon">⚡</span>
+          <span class="tab-text">Live God Mode</span>
+        </button>
+      </nav>
+
+      <!-- Main Content Views -->
+      <main class="admin-main">
+
+        <!-- ================= TAB 1: CONTESTS MANAGER ================= -->
+        <section id="adm-view-contests" class="adm-view active">
+          <div class="adm-card">
+            <div class="card-header">
+              <div class="card-icon">🏆</div>
+              <div>
+                <h3>Create New Contest</h3>
+                <p class="card-desc">Publish real-time guaranteed contests to the Fantasy11 player lobby</p>
+              </div>
+            </div>
+
+            <form id="form-create-contest" class="adm-form">
+              <div class="form-group">
+                <label>Contest Title</label>
+                <input type="text" id="adm-c-name" required value="Super Sunday Mega Dhamaka" placeholder="e.g. Mega Grand League">
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Category</label>
+                  <select id="adm-c-type">
+                    <option value="mega">Mega Contest (Guaranteed)</option>
+                    <option value="h2h">Head to Head (2 Spots)</option>
+                    <option value="wta">Winner Takes All (3-4 Spots)</option>
+                    <option value="popular">Popular League</option>
+                    <option value="practice">Practice (Free Entry)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Badge Tag</label>
+                  <input type="text" id="adm-c-badge" value="MEGA" placeholder="e.g. MEGA, HOT, EXCLUSIVE">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Total Prize Pool</label>
+                  <input type="text" id="adm-c-prize" required value="₹10 Crores" placeholder="e.g. ₹10 Crores">
+                </div>
+                <div class="form-group">
+                  <label>1st Prize Payout</label>
+                  <input type="text" id="adm-c-first-prize" required value="₹1 Crore + SUV" placeholder="e.g. ₹1 Crore">
+                </div>
+              </div>
+
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label>Entry Fee (₹)</label>
+                  <input type="number" id="adm-c-fee" required value="39" min="0">
+                </div>
+                <div class="form-group">
+                  <label>Total Spots</label>
+                  <input type="number" id="adm-c-spots" required value="300000" min="2">
+                </div>
+                <div class="form-group">
+                  <label>Max Teams / User</label>
+                  <input type="number" id="adm-c-maxteams" value="10" min="1" max="20">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-action primary">
+                🚀 PUBLISH CONTEST TO PLAYER APP
+              </button>
+            </form>
+          </div>
+
+          <div class="adm-card" style="margin-top:16px">
+            <div class="card-header space-between">
+              <div>
+                <h3>Active Lobby Contests (<span id="contests-count-badge">0</span>)</h3>
+                <p class="card-desc">Contests currently displayed to users</p>
+              </div>
+            </div>
+            <div id="adm-contests-list" class="adm-items-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 2: FIXTURES MANAGER ================= -->
+        <section id="adm-view-fixtures" class="adm-view">
+          <div class="adm-card">
+            <div class="card-header">
+              <div class="card-icon">🏏</div>
+              <div>
+                <h3>Schedule Match Fixture</h3>
+                <p class="card-desc">Add cricket, football, or kabaddi fixtures with custom lineups</p>
+              </div>
+            </div>
+
+            <form id="form-create-match" class="adm-form">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Match Title</label>
+                  <input type="text" id="adm-m-title" required value="India vs Pakistan" placeholder="e.g. India vs Pakistan">
+                </div>
+                <div class="form-group">
+                  <label>Sport</label>
+                  <select id="adm-m-sport">
+                    <option value="cricket">Cricket 🏏</option>
+                    <option value="football">Football ⚽</option>
+                    <option value="kabaddi">Kabaddi 🤼</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Series / League</label>
+                  <input type="text" id="adm-m-series" required value="ICC Men's T20 World Cup 2026">
+                </div>
+                <div class="form-group">
+                  <label>Venue</label>
+                  <input type="text" id="adm-m-venue" required value="Melbourne Cricket Ground, Australia">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Team 1 (Name, Short, Logo/Emoji)</label>
+                  <input type="text" id="adm-m-t1" required value="India, IND, 🇮🇳">
+                </div>
+                <div class="form-group">
+                  <label>Team 2 (Name, Short, Logo/Emoji)</label>
+                  <input type="text" id="adm-m-t2" required value="Pakistan, PAK, 🇵🇰">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Featured Mega Prize</label>
+                  <input type="text" id="adm-m-prize" value="₹75 Crores">
+                </div>
+                <div class="form-group">
+                  <label>Mega Entry Fee (₹)</label>
+                  <input type="number" id="adm-m-fee" value="49" min="0">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-action primary">
+                🏏 ADD FIXTURE TO MATCH SCHEDULE
+              </button>
+            </form>
+          </div>
+
+          <div class="adm-card" style="margin-top:16px">
+            <div class="card-header">
+              <div>
+                <h3>Scheduled Fixtures</h3>
+                <p class="card-desc">Matches currently active in the tournament calendar</p>
+              </div>
+            </div>
+            <div id="adm-matches-list" class="adm-items-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 3: WALLET & AUDIT LEDGER ================= -->
+        <section id="adm-view-wallet" class="adm-view">
+          <div class="adm-card">
+            <div class="card-header">
+              <div class="card-icon">💰</div>
+              <div>
+                <h3>Player Wallet Controller</h3>
+                <p class="card-desc">Inject deposits, credit winnings, reward bonus cash, or reset balance</p>
+              </div>
+            </div>
+
+            <!-- Quick Wallet Adjust Buttons -->
+            <div class="quick-wallet-grid">
+              <button type="button" class="btn-wallet-quick deposit" data-action="add-dep" data-val="500">
+                <span class="qw-amount">+₹500</span>
+                <span class="qw-label">Deposit Cash</span>
+              </button>
+              <button type="button" class="btn-wallet-quick winnings" data-action="add-win" data-val="1000">
+                <span class="qw-amount">+₹1,000</span>
+                <span class="qw-label">Winnings Payout</span>
+              </button>
+              <button type="button" class="btn-wallet-quick bonus" data-action="add-bon" data-val="250">
+                <span class="qw-amount">+₹250</span>
+                <span class="qw-label">Bonus Cash</span>
+              </button>
+              <button type="button" class="btn-wallet-quick reset" data-action="reset">
+                <span class="qw-amount">🔄 ₹1,500</span>
+                <span class="qw-label">Reset Default</span>
+              </button>
+            </div>
+
+            <div class="divider-line"></div>
+
+            <!-- Direct Balance Modifiers -->
+            <h4 class="sub-section-title">Manual Balance Calibration:</h4>
+            <div class="form-grid-3" style="margin-top:10px">
+              <div class="form-group">
+                <label>Deposited Cash (₹)</label>
+                <input type="number" id="adm-w-dep" value="500">
+              </div>
+              <div class="form-group">
+                <label>Withdrawable Winnings (₹)</label>
+                <input type="number" id="adm-w-win" value="650">
+              </div>
+              <div class="form-group">
+                <label>Cash Bonus (₹)</label>
+                <input type="number" id="adm-w-bon" value="350">
+              </div>
+            </div>
+
+            <button type="button" id="btn-save-wallet-custom" class="btn-action success" style="margin-top:12px">
+              💾 SAVE WALLET BALANCES NOW
+            </button>
+          </div>
+
+          <!-- Live Audit Ledger / Transactions Passbook -->
+          <div class="adm-card" style="margin-top:16px">
+            <div class="card-header space-between">
+              <div>
+                <h3>Live Transaction Audit Ledger</h3>
+                <p class="card-desc">All player deposits, IMPS withdrawals, contest payments, and winnings</p>
+              </div>
+              <button id="btn-refresh-ledger" class="btn-icon-pill-small">🔄 Refresh</button>
+            </div>
+            <div id="adm-ledger-list" class="adm-ledger-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 4: LIVE MATCH GOD MODE ================= -->
+        <section id="adm-view-godmode" class="adm-view">
+          
+          <!-- Live Scoreboard Card -->
+          <div class="godmode-live-scoreboard">
+            <div class="sb-header">
+              <span class="live-blinker">🔴 LIVE BROADCAST</span>
+              <span class="sb-series">AUS vs IND • T20 World Cup</span>
+            </div>
+            <div class="sb-main">
+              <div class="sb-score-big">
+                <span id="gm-team-name">AUS</span>
+                <span id="gm-runs-wickets" class="score-num">0/0</span>
+              </div>
+              <div class="sb-overs-box">
+                <span class="overs-label">OVERS</span>
+                <span id="gm-overs-display" class="overs-num">0.0 / 20</span>
+              </div>
+            </div>
+            <div class="sb-controls-row">
+              <button id="btn-gm-step-sim" class="btn-gm-control step">
+                ▶️ STEP AUTO SIMULATION (1 BALL)
+              </button>
+              <button id="btn-gm-reset-sim" class="btn-gm-control reset">
+                🔄 RESET MATCH
+              </button>
+            </div>
+          </div>
+
+          <!-- God Mode Ball Injector -->
+          <div class="adm-card" style="margin-top:16px">
+            <div class="card-header">
+              <div class="card-icon godmode">⚡</div>
+              <div>
+                <h3 style="color:#f59e0b">Direct Event Injector (God Mode)</h3>
+                <p class="card-desc">Inject custom real-time events. Leaderboard and player fantasy points recalculate instantly!</p>
+              </div>
+            </div>
+
+            <form id="form-adm-godmode" class="adm-form">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Striker Batsman</label>
+                  <input type="text" id="adm-gm-bat" value="Travis Head" required>
+                </div>
+                <div class="form-group">
+                  <label>Bowler</label>
+                  <input type="text" id="adm-gm-bowl" value="Jasprit Bumrah" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Ball Outcome</label>
+                <div class="godmode-outcomes-grid">
+                  <label class="outcome-radio">
+                    <input type="radio" name="gm-outcome" value="0">
+                    <span class="chip-label">Dot (0)</span>
+                  </label>
+                  <label class="outcome-radio">
+                    <input type="radio" name="gm-outcome" value="1">
+                    <span class="chip-label">1 Run</span>
+                  </label>
+                  <label class="outcome-radio">
+                    <input type="radio" name="gm-outcome" value="2">
+                    <span class="chip-label">2 Runs</span>
+                  </label>
+                  <label class="outcome-radio">
+                    <input type="radio" name="gm-outcome" value="3">
+                    <span class="chip-label">3 Runs</span>
+                  </label>
+                  <label class="outcome-radio four">
+                    <input type="radio" name="gm-outcome" value="4" checked>
+                    <span class="chip-label">FOUR (4)</span>
+                  </label>
+                  <label class="outcome-radio six">
+                    <input type="radio" name="gm-outcome" value="6">
+                    <span class="chip-label">SIX (6)</span>
+                  </label>
+                  <label class="outcome-radio wicket">
+                    <input type="radio" name="gm-outcome" value="w">
+                    <span class="chip-label">WICKET ⚡</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group" id="adm-gm-wtype-group" style="display:none">
+                <label>Dismissal Type</label>
+                <select id="adm-gm-wtype">
+                  <option value="bowled">Bowled (+25 Wicket +8 Clean Bowled Bonus)</option>
+                  <option value="caught">Caught (+25 Wicket +8 Fielder Catch Bonus)</option>
+                  <option value="lbw">LBW (+25 Wicket +8 LBW Bonus)</option>
+                  <option value="stumped">Stumped (+25 Wicket +12 Wicketkeeper Stumping)</option>
+                  <option value="runout">Run Out (+12 Direct Hit Run Out)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Broadcast Commentary Line</label>
+                <input type="text" id="adm-gm-comment" value="CRACKING SHOT! Travis Head leans into the drive and carves it through covers for FOUR!" required>
+              </div>
+
+              <button type="submit" class="btn-action godmode-btn">
+                ⚡ INJECT CUSTOM BALL INTO MATCH
+              </button>
+            </form>
+          </div>
+
+          <!-- Real-Time Commentary Stream -->
+          <div class="adm-card" style="margin-top:16px">
+            <div class="card-header">
+              <div>
+                <h3>Recent Match Commentary Stream</h3>
+                <p class="card-desc">Real-time ball events dispatched to all connected players</p>
+              </div>
+            </div>
+            <div id="adm-commentary-feed" class="adm-commentary-feed">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Real-Time Fantasy Leaderboard Preview -->
+          <div class="adm-card" style="margin-top:16px">
+            <div class="card-header">
+              <div>
+                <h3>Live Contest Leaderboard Preview</h3>
+                <p class="card-desc">Live calculation of user vs competitor fantasy points</p>
+              </div>
+            </div>
+            <div id="adm-leaderboard-feed" class="adm-leaderboard-feed">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script src="mock.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
