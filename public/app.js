@@ -279,7 +279,7 @@ function switchView(viewId) {
 async function initApp() {
   // PWA Service Worker Registration
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(reg => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
       console.log('Fantasy11 ServiceWorker registered with scope:', reg.scope);
     }).catch(err => console.log('SW registration error:', err));
   }
