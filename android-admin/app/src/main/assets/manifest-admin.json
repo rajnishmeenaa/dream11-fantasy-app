@@ -1,8 +1,8 @@
 {
-  "name": "Fantasy11 Admin Console",
-  "short_name": "F11 Admin",
-  "description": "Executive operations console for Fantasy11 administrators",
-  "start_url": "/admin.html",
+  "name": "Dream11 Admin Console",
+  "short_name": "D11 Admin",
+  "description": "Executive operations console for Dream11 administrators",
+  "start_url": "admin.html",
   "display": "standalone",
   "background_color": "#0b0f19",
   "theme_color": "#0b0f19",
