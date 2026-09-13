@@ -35,9 +35,8 @@ Fantasy11 is a production-ready fantasy sports platform built with a **Dual Andr
 │   └── manifest-admin.json          # Admin PWA Web App Manifest
 │
 ├── .github/workflows/
-│   └── build-apk.yml                # Automated GitHub Actions Cloud APK Builder
-├── server.py                        # Centralized live Python backend & API router
-├── start_app.bat                    # One-click server launcher
+│   ├── build-apk.yml                # Automated GitHub Actions Cloud APK Builder
+│   └── deploy-pages.yml             # Automated GitHub Pages Deployment
 └── build_apks.bat                   # Local Windows APK build helper script
 ```
 
@@ -45,17 +44,10 @@ Fantasy11 is a production-ready fantasy sports platform built with a **Dual Andr
 
 ## 🚀 Getting Started
 
-### 1. Launch Backend Server
-```bash
-python server.py
-# Or double-click start_app.bat
-```
-The server will bind to `0.0.0.0:8000` and display your local Wi-Fi IP (e.g., `http://10.191.72.249:8000`).
-
-### 2. Instant Smartphone Access (PWA)
-Connect your Android phone to the same Wi-Fi:
-- **Player App**: Open `http://<your-ip>:8000/` in Chrome ➔ Tap **Install App**
-- **Admin Console**: Open `http://<your-ip>:8000/admin.html` in Chrome ➔ Tap **Install App**
+### Instant Web Access (PWA)
+Play immediately via the live zero-error Web App:
+- **Player App**: Open [https://rajnishmeenaa.github.io/dream11-fantasy-app/](https://rajnishmeenaa.github.io/dream11-fantasy-app/) in your browser ➔ Tap **Install App**
+- **Admin Console**: Open [https://rajnishmeenaa.github.io/dream11-fantasy-app/admin.html](https://rajnishmeenaa.github.io/dream11-fantasy-app/admin.html) in your browser ➔ Tap **Install App**
 
 ---
 

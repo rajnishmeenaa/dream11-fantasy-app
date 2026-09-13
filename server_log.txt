@@ -1,0 +1,25 @@
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /admin.html HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /admin.js HTTP/1.1" 304 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /admin.css HTTP/1.1" 304 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /manifest-admin.json HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /mock.js HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /api/data HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /api/user/transactions HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:40] code 404, message File not found
+127.0.0.1 - - [13/Sep/2026 16:27:40] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Sep/2026 16:27:42] "GET /sw.js HTTP/1.1" 304 -
+127.0.0.1 - - [13/Sep/2026 16:27:44] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:48] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:52] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:27:56] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:00] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:04] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:08] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:10] code 404, message File not found
+127.0.0.1 - - [13/Sep/2026 16:28:10] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Sep/2026 16:28:12] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:16] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:20] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:24] "GET /api/simulation/state HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:26] "GET /api/data HTTP/1.1" 200 -
+127.0.0.1 - - [13/Sep/2026 16:28:26] "GET /api/user/transactions HTTP/1.1" 200 -

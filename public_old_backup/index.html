@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dream11 - Official Fantasy Cricket & Sports App</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#991313">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Main Mobile Screen Container -->
+    <div class="mobile-frame">
+
+      <!-- Floating Simulated Mobile Push SMS Banner -->
+      <div class="sms-push-banner hidden" id="sms-push-banner">
+        <div class="sms-banner-top">
+          <div class="sms-app-badge">💬 MESSAGES • DREAM11 OTP</div>
+          <button class="sms-dismiss-btn" id="btn-dismiss-sms">✕</button>
+        </div>
+        <div class="sms-content">
+          Your Dream11 Bank Withdrawal OTP is <strong id="sms-otp-display">849201</strong>. Valid for 10 minutes. Do not share with anyone.
+        </div>
+        <div class="sms-actions">
+          <button id="btn-sms-tap-autofill" class="btn-sms-action">⚡ Tap to Auto-Fill 6 Boxes</button>
+        </div>
+      </div>
+      <!-- Dream11 Left Sliding Profile Drawer Overlay & Container -->
+      <div class="drawer-overlay hidden" id="drawer-overlay"></div>
+      <aside class="side-drawer" id="side-drawer">
+        <div class="drawer-header">
+          <div class="drawer-user-info">
+            <div class="drawer-avatar-wrap">
+              <div class="drawer-avatar">🏏</div>
+              <div class="drawer-online-dot"></div>
+            </div>
+            <div class="drawer-user-meta">
+              <h3 class="drawer-user-name" id="drawer-user-name">Rahul Sharma</h3>
+              <span class="drawer-user-handle" id="drawer-user-handle">@rahul_xi</span>
+              <div class="drawer-badges">
+                <span class="drawer-level-badge">⭐ Level 45 Pro</span>
+                <span class="drawer-skill-badge">🎯 Skill: 684</span>
+              </div>
+            </div>
+          </div>
+          <button class="drawer-close-btn" id="btn-close-drawer" aria-label="Close Profile">✕</button>
+        </div>
+
+        <!-- Total Balance Card in Drawer -->
+        <div class="drawer-wallet-card">
+          <div class="dw-balance-header">
+            <div class="dw-title-wrap">
+              <span class="dw-label">TOTAL BALANCE</span>
+              <h3 class="dw-amount" id="drawer-wallet-amount">₹1,500</h3>
+            </div>
+            <div class="dw-icon">💰</div>
+          </div>
+          <div class="dw-sub-row">
+            <div class="dw-sub-item">
+              <span>Winnings</span>
+              <strong id="drawer-w-winnings">₹900</strong>
+            </div>
+            <div class="dw-divider"></div>
+            <div class="dw-sub-item">
+              <span>Unutilized</span>
+              <strong id="drawer-w-deposited">₹500</strong>
+            </div>
+            <div class="dw-divider"></div>
+            <div class="dw-sub-item">
+              <span>Bonus</span>
+              <strong id="drawer-w-bonus">₹100</strong>
+            </div>
+          </div>
+          <div class="dw-actions">
+            <button class="dw-btn-add" id="btn-drawer-add-cash">
+              <span>+</span> ADD CASH
+            </button>
+            <button class="dw-btn-withdraw" id="btn-drawer-withdraw">
+              WITHDRAW
+            </button>
+          </div>
+        </div>
+
+        <!-- Dream11 Menu Navigation List -->
+        <div class="drawer-menu-list">
+          <div class="d-menu-item" id="d-menu-matches">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">🏆</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">My Matches</span>
+                <span class="d-menu-sub">Upcoming, live & completed contests</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-rewards">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">🎁</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">Rewards & Offers</span>
+                <span class="d-menu-sub">DreamCoins shop, match passes & cashback</span>
+              </div>
+            </div>
+            <span class="d-menu-badge">2,450 🪙</span>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-chat">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">💬</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">Chat & Groups</span>
+                <span class="d-menu-sub">Private leagues, friends & fan clubs</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-winners">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">🥇</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">Winners Hall of Fame</span>
+                <span class="d-menu-sub">Mega Crorepatis & daily leaderboards</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-invite">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">🤝</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">Invite & Earn ₹500</span>
+                <span class="d-menu-sub">Get ₹500 cash bonus per friend</span>
+              </div>
+            </div>
+            <span class="d-menu-tag">HOT 🔥</span>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-champions">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">👑</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">Champions Club</span>
+                <span class="d-menu-sub">VIP tier rewards, exclusive perks</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-points">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">📊</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">Fantasy Points System</span>
+                <span class="d-menu-sub">T20, ODI, Test, Football & Basketball</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-fairplay">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">🛡️</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">100% Fair Play & Legality</span>
+                <span class="d-menu-sub">Game of Skill, Supreme Court verified</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-settings">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">⚙️</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">App Settings</span>
+                <span class="d-menu-sub">Notifications, stadium sounds, language</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+
+          <div class="d-menu-item" id="d-menu-help">
+            <div class="d-menu-left">
+              <span class="d-menu-icon">🎧</span>
+              <div class="d-menu-text">
+                <span class="d-menu-title">24x7 Help & Support</span>
+                <span class="d-menu-sub">Instant chat with customer executive</span>
+              </div>
+            </div>
+            <span class="d-menu-arrow">›</span>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <button class="dw-btn-pwa hidden" id="btn-pwa-install" style="width:100%; margin-bottom:8px; background:#1e293b; color:#38bdf8; border:1px solid #0284c7; border-radius:8px; padding:8px 0; font-size:11px; font-weight:800; cursor:pointer;">📲 Install Dream11 App (PWA)</button>
+          <div class="df-compliance">
+            <span>🛡️ 100% Safe & RBI Approved Payment Gateways</span>
+          </div>
+          <div class="df-version">Dream11 Mobile App • v5.42.1 Official</div>
+        </div>
+      </aside>
+
+      <!-- Authentic Dream11 Crimson Top Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button id="btn-menu" class="icon-btn avatar-btn" title="Open Profile Menu">
+            <div class="user-avatar-badge" id="header-avatar">🏏</div>
+            <span class="avatar-level-tag">L45</span>
+          </button>
+          <div class="logo-container" id="nav-logo-home">
+            <div class="brand-emblem">
+              <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 4L7 11V22C7 33.1 14.3 43.4 24 46C33.7 43.4 41 33.1 41 22V11L24 4Z" fill="url(#d11-shield-grad)" stroke="#ffffff" stroke-width="2.5"/>
+                <path d="M19 14H24C28.4 14 31 16.8 31 21C31 25.2 28.4 28 24 28H19V14Z" fill="#ffffff"/>
+                <path d="M22 17.5V24.5H23.8C25.8 24.5 27.2 23.4 27.2 21C27.2 18.6 25.8 17.5 23.8 17.5H22Z" fill="#991313"/>
+                <rect x="23" y="29.5" width="2.5" height="7.5" rx="1.2" fill="#ffffff"/>
+                <rect x="27" y="29.5" width="2.5" height="7.5" rx="1.2" fill="#ffffff"/>
+                <defs>
+                  <linearGradient id="d11-shield-grad" x1="7" y1="4" x2="41" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#dc2626"/>
+                    <stop offset="0.5" stop-color="#b91c1c"/>
+                    <stop offset="1" stop-color="#7f1d1d"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="brand-text-wrap">
+              <span class="brand-text">DREAM11</span>
+              <span class="brand-subtext">FANTASY SPORTS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="icon-btn notif-btn" id="btn-header-bell" title="Notifications">
+            <span>🔔</span>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="wallet-pill" id="btn-open-wallet" title="Open Wallet">
+            <span class="wallet-icon">₹</span>
+            <span class="wallet-amount" id="header-wallet-amount">₹1,500</span>
+            <span class="wallet-plus">+</span>
+          </div>
+          <button class="icon-btn help-btn" id="btn-header-help" title="24x7 Help Desk">
+            <span>🎧</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Sports Selector Bar (Dream11 Multi-Sport) -->
+      <nav class="sports-nav">
+        <div class="sport-tab active" data-sport="cricket">
+          <span class="sport-icon">🏏</span>
+          <span class="sport-name">Cricket</span>
+          <span class="sport-active-indicator"></span>
+        </div>
+        <div class="sport-tab" data-sport="football">
+          <span class="sport-icon">⚽</span>
+          <span class="sport-name">Football</span>
+          <span class="sport-active-indicator"></span>
+        </div>
+        <div class="sport-tab" data-sport="kabaddi">
+          <span class="sport-icon">🤼</span>
+          <span class="sport-name">Kabaddi</span>
+          <span class="sport-active-indicator"></span>
+        </div>
+        <div class="sport-tab" data-sport="basketball">
+          <span class="sport-icon">🏀</span>
+          <span class="sport-name">Basketball</span>
+          <span class="sport-active-indicator"></span>
+        </div>
+        <div class="sport-tab" data-sport="baseball">
+          <span class="sport-icon">⚾</span>
+          <span class="sport-name">Baseball</span>
+          <span class="sport-active-indicator"></span>
+        </div>
+      </nav>
+
+      <!-- Main Scrollable Content Area -->
+      <main class="content-scroll" id="main-content">
+        <!-- ================= VIEW 1: HOME (Authentic Dream11) ================= -->
+        <section id="view-home" class="app-view active">
+          <!-- Promotional Mega Carousel -->
+          <div class="banner-carousel">
+            <div class="banner-slide">
+              <div class="banner-slide-content">
+                <div class="banner-tag">🔥 TATA IPL 2026 MEGA CONTEST</div>
+                <h2>₹75 CRORES PRIZE POOL</h2>
+                <p>1st Prize: ₹2 Crores Guaranteed + BMW M4! Entry only ₹49</p>
+                <div class="banner-btn" id="btn-home-banner-join">JOIN MEGA CONTEST →</div>
+              </div>
+              <div class="banner-trophy-badge">🏆</div>
+            </div>
+          </div>
+
+          <!-- Quick Filters Bar -->
+          <div class="quick-filters">
+            <button class="filter-chip active" data-filter="all">All Matches</button>
+            <button class="filter-chip" data-filter="mega">🔥 Mega Contests</button>
+            <button class="filter-chip" data-filter="lineups">🟢 Lineups Out</button>
+          </div>
+
+          <!-- Upcoming Matches Section Header -->
+          <div class="section-title-bar">
+            <div class="st-left">
+              <h3>Upcoming Matches</h3>
+              <span class="live-dot-pulse"></span>
+            </div>
+            <span class="section-count" id="match-count-badge">3 Matches</span>
+          </div>
+
+          <!-- Dynamic Match Cards Container -->
+          <div class="matches-list" id="matches-container">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </section>
+
+<section id="view-contests" class="app-view">
+          <div class="sub-header">
+            <button class="back-btn" id="btn-back-to-home">←</button>
+            <div class="sub-header-title">
+              <h4 id="contest-match-title">IND vs AUS</h4>
+              <span class="time-pill" id="contest-match-timer">14m 20s left</span>
+            </div>
+            <button class="icon-btn info-btn" id="btn-open-points-system" title="Fantasy Points System">ℹ️</button>
+          </div>
+
+          <!-- Selected Match Header Card -->
+          <div class="match-info-card" id="contest-match-card">
+            <!-- Rendered by app.js -->
+          </div>
+
+          <!-- Contest Tabs: Contests, My Contests, My Teams -->
+          <div class="sub-tabs-bar">
+            <button class="sub-tab active" data-subtab="all-contests" id="tab-all-contests">Contests</button>
+            <button class="sub-tab" data-subtab="my-contests" id="tab-my-contests">My Contests (0)</button>
+            <button class="sub-tab" data-subtab="my-teams" id="tab-my-teams">My Teams (0)</button>
+          </div>
+
+                    <!-- Private Contest Quick Bar -->
+          <div class="private-contest-banner">
+            <div class="pc-banner-header">
+              <span class="pc-badge">🔒 PRIVATE CONTESTS</span>
+              <span style="font-size:11px; color:#cbd5e1">Play exclusively with friends</span>
+            </div>
+            <div class="pc-actions-row">
+              <div class="pc-code-input-wrap">
+                <input type="text" id="input-invite-code" placeholder="Enter Code (e.g. F11-882)" maxlength="10">
+                <button id="btn-submit-code-join" class="btn-pc-join">Join</button>
+              </div>
+              <button id="btn-open-create-private" class="btn-pc-create">+ Create League</button>
+            </div>
+          </div>
+
+          <!-- Category Filter Bar -->
+          <div class="contest-type-pills" id="contest-category-bar">
+            <button class="type-pill active" data-type="all">All</button>
+            <button class="type-pill" data-type="mega">Mega</button>
+            <button class="type-pill" data-type="h2h">Head-to-Head</button>
+            <button class="type-pill" data-type="wta">Winner Takes All</button>
+            <button class="type-pill" data-type="practice">Free Practice</button>
+            <button class="type-pill" data-type="private">🔒 Private</button>
+          </div>
+
+          <!-- Contests List -->
+          <div class="contests-list" id="contests-container">
+            <!-- Dynamically populated contest cards -->
+          </div>
+
+          <!-- My Teams Tab Content Container (Hidden by default) -->
+          <div class="my-teams-container hidden" id="my-teams-container">
+            <!-- Rendered user teams -->
+          </div>
+
+          <!-- My Joined Contests Tab Content (Hidden by default) -->
+          <div class="my-contests-container hidden" id="my-contests-container">
+            <!-- Rendered joined contests -->
+          </div>
+
+          <!-- Floating Bottom Action Bar in Contests -->
+          <div class="floating-contest-bar">
+            <button class="btn-create-team-main" id="btn-start-team-create">
+              <span class="plus-icon">+</span> CREATE TEAM
+            </button>
+          </div>
+        </section>
+
+        <!-- ================= VIEW 3: CREATE TEAM ================= -->
+
+<section id="view-create-team" class="app-view">
+          <div class="sub-header">
+            <button class="back-btn" id="btn-back-to-contests">←</button>
+            <div class="sub-header-title">
+              <h4>Create Team <span id="team-number-label">1</span></h4>
+              <span class="time-pill" id="team-match-timer">14m left</span>
+            </div>
+            <button class="pitch-btn" id="btn-quick-preview-pitch">
+              🌱 Preview
+            </button>
+          </div>
+
+          <!-- Team Composition Rules Bar -->
+          <div class="team-summary-bar">
+            <div class="team-meta-row">
+              <div class="meta-item">
+                <span class="meta-label">Players</span>
+                <span class="meta-val"><strong id="selected-count-text">0</strong>/11</span>
+              </div>
+              <div class="team-breakdown-pill">
+                <span class="team-short-badge t1" id="badge-team1">IND</span>
+                <span class="team-count" id="count-team1">0</span>
+                <span class="vs-sep">:</span>
+                <span class="team-count" id="count-team2">0</span>
+                <span class="team-short-badge t2" id="badge-team2">AUS</span>
+              </div>
+              <div class="meta-item text-right">
+                <span class="meta-label">Credits Left</span>
+                <span class="meta-val"><strong id="credits-left-text">100.0</strong></span>
+              </div>
+            </div>
+
+            <!-- 11 Dots Progress Bar -->
+            <div class="dots-progress" id="team-dots-container">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+
+          <!-- Position Tabs: WK, BAT, AR, BOWL -->
+          <div class="position-tabs-bar">
+            <div class="pos-tab active" data-role="WK">
+              WK (<span id="role-count-WK">0</span>)
+              <span class="pos-rule">Select 1-8</span>
+            </div>
+            <div class="pos-tab" data-role="BAT">
+              BAT (<span id="role-count-BAT">0</span>)
+              <span class="pos-rule">Select 1-8</span>
+            </div>
+            <div class="pos-tab" data-role="AR">
+              AR (<span id="role-count-AR">0</span>)
+              <span class="pos-rule">Select 1-8</span>
+            </div>
+            <div class="pos-tab" data-role="BOWL">
+              BOWL (<span id="role-count-BOWL">0</span>)
+              <span class="pos-rule">Select 1-8</span>
+            </div>
+          </div>
+
+          <!-- Position Guide Notice -->
+          <div class="position-guide-notice" id="position-guide-text">
+            Pick 1 to 8 Wicket-Keepers (WK)
+          </div>
+
+          <!-- Player List Table -->
+          <div class="player-list-container">
+            <div class="table-head">
+              <span class="th-player">PLAYER</span>
+              <span class="th-points">POINTS</span>
+              <span class="th-sel">% SEL</span>
+              <span class="th-credits">CREDITS</span>
+              <span class="th-action"></span>
+            </div>
+            <div class="player-rows" id="players-table-body">
+              <!-- Rendered player rows -->
+            </div>
+          </div>
+
+          <!-- Bottom Team Action Bar -->
+          <div class="floating-team-footer">
+            <button class="btn-secondary" id="btn-view-pitch-from-builder">
+              🌱 TEAM PREVIEW
+            </button>
+            <button class="btn-primary" id="btn-proceed-to-cvc" disabled>
+              NEXT (CHOOSE C/VC) →
+            </button>
+          </div>
+        </section>
+
+        <!-- ================= VIEW 4: CHOOSE C & VC ================= -->
+
+<section id="view-choose-cvc" class="app-view">
+          <div class="sub-header">
+            <button class="back-btn" id="btn-back-to-team-create">←</button>
+            <div class="sub-header-title">
+              <h4>Choose Captain & Vice Captain</h4>
+              <span class="time-pill">Final Step</span>
+            </div>
+            <button class="pitch-btn" id="btn-pitch-preview-from-cvc">🌱 Pitch</button>
+          </div>
+
+          <!-- Multiplier Explainer Banner -->
+          <div class="cvc-explainer-banner">
+            <div class="cvc-box c-box">
+              <span class="cvc-badge c-badge">C</span>
+              <div class="cvc-desc">
+                <strong>Captain</strong>
+                <span>Gets <strong>2X Points</strong></span>
+              </div>
+            </div>
+            <div class="cvc-box vc-box">
+              <span class="cvc-badge vc-badge">VC</span>
+              <div class="cvc-desc">
+                <strong>Vice-Captain</strong>
+                <span>Gets <strong>1.5X Points</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- C & VC Table -->
+          <div class="cvc-table-container">
+            <div class="cvc-table-head">
+              <span>SELECTED 11 PLAYERS</span>
+              <span class="text-center">% C</span>
+              <span class="text-center">% VC</span>
+            </div>
+            <div class="cvc-rows" id="cvc-table-body">
+              <!-- Rendered 11 players with C and VC toggle buttons -->
+            </div>
+          </div>
+
+          <!-- Save Team Bottom Bar -->
+          <div class="floating-team-footer">
+            <button class="btn-secondary" id="btn-pitch-from-cvc-bottom">
+              🌱 PREVIEW
+            </button>
+            <button class="btn-primary" id="btn-save-final-team" disabled>
+              SAVE TEAM ✓
+            </button>
+          </div>
+        </section>
+
+        <!-- ================= VIEW 5: MY MATCHES ================= -->
+
+<section id="view-my-matches" class="app-view">
+          <div class="section-header-simple">
+            <h3>My Matches</h3>
+            <p>Track your fantasy teams, live scores & winnings</p>
+          </div>
+
+          <!-- Match Status Tabs -->
+          <div class="sub-tabs-bar">
+            <button class="sub-tab active" data-mystat="upcoming" id="tab-my-upcoming">Upcoming</button>
+            <button class="sub-tab" data-mystat="live" id="tab-my-live">Live <span class="live-pulse-dot"></span></button>
+            <button class="sub-tab" data-mystat="completed" id="tab-my-completed">Completed</button>
+          </div>
+
+          <div class="my-matches-list" id="my-matches-list">
+            <!-- Rendered user match cards -->
+          </div>
+        </section>
+
+        <!-- ================= VIEW 6: LIVE MATCH & SIMULATION ================= -->
+
+<section id="view-live-match" class="app-view">
+          <div class="sub-header">
+            <button class="back-btn" id="btn-back-from-live">←</button>
+            <div class="sub-header-title">
+              <h4>IND vs AUS - LIVE FANTASY</h4>
+              <span class="live-pill"><span class="live-blink"></span> LIVE MATCH</span>
+            </div>
+            <button class="pitch-btn" id="btn-live-team-preview">🌱 My XI</button>
+          </div>
+
+                    <!-- Stadium Audio & Bilingual Commentary Switcher -->
+          <div class="live-action-toggles">
+            <button id="btn-toggle-sound" class="live-pill-toggle active" title="Toggle Stadium Sound FX">
+              <span id="sound-icon">🔊</span> <span id="sound-text">Sound ON</span>
+            </button>
+            <button id="btn-toggle-lang" class="live-pill-toggle" title="Toggle Commentary Language">
+              🌐 <span id="lang-text">Commentary: English</span>
+            </button>
+          </div>
+
+          <!-- Live Match Scoreboard -->
+          <div class="live-scoreboard-card">
+            <div class="score-row-main">
+              <div class="team-score-block">
+                <span class="team-flag">🇦🇺</span>
+                <span class="team-name">AUS</span>
+                <span class="score-display" id="live-aus-score">0/0</span>
+                <span class="overs-display" id="live-aus-overs">(0.0 ov)</span>
+              </div>
+              <div class="vs-divider">VS</div>
+              <div class="team-score-block">
+                <span class="team-flag">🇮🇳</span>
+                <span class="team-name">IND</span>
+                <span class="score-display">Yet to bat</span>
+              </div>
+            </div>
+
+            <!-- Current Batsmen & Bowler Strip -->
+            <div class="live-players-strip">
+              <div class="strip-item">
+                <span class="strip-role">Striker:</span>
+                <strong id="live-striker-name">Travis Head</strong>
+              </div>
+              <div class="strip-item">
+                <span class="strip-role">Bowler:</span>
+                <strong id="live-bowler-name">Jasprit Bumrah</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation Controls Bar -->
+          <div class="sim-controls-panel">
+            <div class="sim-ctrl-row">
+              <button class="sim-btn sim-btn-play" id="btn-sim-play-pause">
+                ▶ START SIMULATION
+              </button>
+              <button class="sim-btn sim-btn-step" id="btn-sim-next-ball">
+                ⏭ Next Ball
+              </button>
+              <button class="sim-btn sim-btn-reset" id="btn-sim-reset">
+                🔄 Reset
+              </button>
+            </div>
+            <div class="speed-selector">
+              <span class="speed-label">Speed:</span>
+              <button class="speed-chip active" data-speed="1500">1X</button>
+              <button class="speed-chip" data-speed="800">2X</button>
+              <button class="speed-chip" data-speed="300">5X</button>
+              <button class="speed-chip" data-speed="50">⚡ Instant</button>
+            </div>
+          </div>
+
+          <!-- User Live Fantasy Card -->
+          <div class="user-live-fantasy-card">
+            <div class="fantasy-points-header">
+              <div>
+                <span class="uf-label">YOUR FANTASY POINTS</span>
+                <h2 id="user-live-pts">0 <span class="pts-unit">PTS</span></h2>
+              </div>
+              <div class="text-right">
+                <span class="uf-label">CURRENT RANK</span>
+                <div class="rank-badge" id="user-live-rank">#1</div>
+              </div>
+            </div>
+            <div class="captains-live-pills" id="live-team-cvc-strip">
+              <span class="pill-c">C: Rohit (2x)</span>
+              <span class="pill-vc">VC: Bumrah (1.5x)</span>
+            </div>
+          </div>
+
+          <!-- Split Tabs: Commentary vs Live Leaderboard -->
+          <div class="sub-tabs-bar">
+            <button class="sub-tab active" data-livesub="commentary" id="tab-live-commentary">Ball-by-Ball (Live)</button>
+            <button class="sub-tab" data-livesub="leaderboard" id="tab-live-leaderboard">Live Leaderboard</button>
+            <button class="sub-tab" data-livesub="player-stats" id="tab-live-player-stats">Fantasy11 Points</button>
+          </div>
+
+          <!-- Live Commentary Feed -->
+          <div class="live-feed-container" id="live-commentary-feed">
+            <div class="feed-empty-state" id="feed-empty">
+              Click <strong>"▶ START SIMULATION"</strong> to bowl the first delivery!
+            </div>
+          </div>
+
+          <!-- Live Leaderboard Container (Hidden by default) -->
+          <div class="live-leaderboard-container hidden" id="live-leaderboard-feed">
+            <!-- Rendered competitor and user teams -->
+          </div>
+
+          <!-- Live Player Fantasy11 Points Container (Hidden by default) -->
+          <div class="live-player-points-container hidden" id="live-player-points-feed">
+            <!-- Rendered player points breakdown -->
+          </div>
+        </section>
+
+        <!-- ================= VIEW 7: REWARDS & RULES ================= -->
+
+<section id="view-rewards" class="app-view">
+          <div class="section-header-simple">
+            <h3>Rewards & Rules</h3>
+            <p>Earn Dream Coins, claim bonuses, and master points</p>
+          </div>
+
+          <!-- Daily Bonus Card -->
+          <div class="rewards-hero-card">
+            <div class="reward-icon-box">🎁</div>
+            <div class="reward-info">
+              <h4>Daily Login Cash Bonus</h4>
+              <p>Claim ₹50 instant fantasy cash bonus every 24 hours</p>
+            </div>
+            <button class="btn-claim-reward" id="btn-claim-daily-bonus">CLAIM ₹50</button>
+          </div>
+
+          <!-- Dream11 Fantasy Point System Sheet -->
+          <div class="points-system-card">
+            <div class="ps-header">
+              <h4>Official T20 Cricket Point System</h4>
+              <span class="ps-badge">Fantasy11 Standard</span>
+            </div>
+
+            <!-- Batting Points -->
+            <div class="ps-group">
+              <h5>🏏 BATTING POINTS</h5>
+              <div class="ps-grid">
+                <div class="ps-item"><span>Run</span><strong>+1 pt</strong></div>
+                <div class="ps-item"><span>Boundary Bonus (4s)</span><strong>+1 pt</strong></div>
+                <div class="ps-item"><span>Six Bonus (6s)</span><strong>+2 pts</strong></div>
+                <div class="ps-item"><span>30 Run Bonus</span><strong>+4 pts</strong></div>
+                <div class="ps-item"><span>Half-Century (50)</span><strong>+8 pts</strong></div>
+                <div class="ps-item"><span>Century (100)</span><strong>+16 pts</strong></div>
+                <div class="ps-item"><span>Duck (BAT/WK/AR)</span><strong>-2 pts</strong></div>
+              </div>
+            </div>
+
+            <!-- Bowling Points -->
+            <div class="ps-group">
+              <h5>🎯 BOWLING POINTS</h5>
+              <div class="ps-grid">
+                <div class="ps-item"><span>Wicket (Excl. Run Out)</span><strong>+25 pts</strong></div>
+                <div class="ps-item"><span>Bonus (LBW / Bowled)</span><strong>+8 pts</strong></div>
+                <div class="ps-item"><span>3 Wicket Bonus</span><strong>+4 pts</strong></div>
+                <div class="ps-item"><span>4 Wicket Bonus</span><strong>+8 pts</strong></div>
+                <div class="ps-item"><span>5 Wicket Bonus</span><strong>+16 pts</strong></div>
+                <div class="ps-item"><span>Maiden Over</span><strong>+12 pts</strong></div>
+              </div>
+            </div>
+
+            <!-- Fielding & Multipliers -->
+            <div class="ps-group">
+              <h5>🧤 FIELDING & MULTIPLIERS</h5>
+              <div class="ps-grid">
+                <div class="ps-item"><span>Catch</span><strong>+8 pts</strong></div>
+                <div class="ps-item"><span>3 Catch Bonus</span><strong>+4 pts</strong></div>
+                <div class="ps-item"><span>Stumping</span><strong>+12 pts</strong></div>
+                <div class="ps-item"><span>Run Out (Direct)</span><strong>+12 pts</strong></div>
+                <div class="ps-item special"><span>Captain (C)</span><strong>2X Points</strong></div>
+                <div class="ps-item special"><span>Vice-Captain (VC)</span><strong>1.5X Points</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= VIEW 8: PROFILE ================= -->
+
+        <!-- ================= VIEW: CHAT & GROUPS (Dream11 Authentic) ================= -->
+        <section id="view-chat-groups" class="app-view">
+          <div class="section-header-simple">
+            <h3>Dream11 Chat & Groups</h3>
+            <p>Join private leagues, chat with friends & get live match tips</p>
+          </div>
+
+          <!-- Enter Private Contest Code Box -->
+          <div class="chat-contest-code-card">
+            <div class="cc-header">
+              <span class="cc-badge">🔒 PRIVATE CONTEST INVITATION</span>
+              <h4>Have an invite code?</h4>
+              <p>Enter the 6-10 character code shared by your friend</p>
+            </div>
+            <div class="cc-input-row">
+              <input type="text" id="input-chat-invite-code" placeholder="e.g. F11-MI-CSK" maxlength="12" class="cc-input">
+              <button class="btn-primary cc-btn-join" id="btn-chat-join-code">JOIN LEAGUE</button>
+            </div>
+            <div class="cc-or-divider">
+              <span>OR</span>
+            </div>
+            <button class="btn-secondary cc-btn-create" id="btn-chat-create-private">
+              + Create Your Own Private Contest
+            </button>
+          </div>
+
+          <!-- Official Dream11 Community Channels -->
+          <div class="chat-channels-title">
+            <h4>Official Community Channels</h4>
+            <span>Active Now</span>
+          </div>
+
+          <div class="chat-channels-list">
+            <div class="chat-channel-item active-channel">
+              <div class="channel-avatar">🏏</div>
+              <div class="channel-info">
+                <div class="channel-top">
+                  <strong class="channel-name">IPL 2026 Match Discussion</strong>
+                  <span class="channel-time">Just now</span>
+                </div>
+                <p class="channel-last-msg"><strong>Expert_Kunal:</strong> Rohit Sharma batting at 142 SR! Must-have for captaincy.</p>
+              </div>
+              <span class="channel-unread">12</span>
+            </div>
+
+            <div class="chat-channel-item">
+              <div class="channel-avatar">⚡</div>
+              <div class="channel-info">
+                <div class="channel-top">
+                  <strong class="channel-name">Official Lineups & Toss Alerts</strong>
+                  <span class="channel-time">14m ago</span>
+                </div>
+                <p class="channel-last-msg">Playing 11 announced for MI vs CSK. Pathirana starting!</p>
+              </div>
+            </div>
+
+            <div class="chat-channel-item">
+              <div class="channel-avatar">🏆</div>
+              <div class="channel-info">
+                <div class="channel-top">
+                  <strong class="channel-name">Mega Contest Crorepatis Club</strong>
+                  <span class="channel-time">1h ago</span>
+                </div>
+                <p class="channel-last-msg">Congrats Ramesh Patel on winning ₹2 Crores today! 🥂</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Live Chat Feed -->
+          <div class="live-chat-box">
+            <div class="lcb-header">
+              <span>💬 Live Fan Chat (MI vs CSK)</span>
+              <span class="lcb-online">🟢 24,812 Online</span>
+            </div>
+            <div class="lcb-messages" id="chat-messages-container">
+              <div class="chat-msg system">
+                <span>🔒 Only verified Dream11 players can participate in chat. Respect Fair Play rules.</span>
+              </div>
+              <div class="chat-msg">
+                <span class="chat-user">@virat_fan_18:</span>
+                <span class="chat-bubble">Who should be VC? Bumrah or Jadeja? 🤔</span>
+              </div>
+              <div class="chat-msg">
+                <span class="chat-user">@csk_whistle:</span>
+                <span class="chat-bubble">Bumrah in death overs is guaranteed 2-3 wickets! 🔥</span>
+              </div>
+              <div class="chat-msg user-msg">
+                <span class="chat-user">You:</span>
+                <span class="chat-bubble">I picked Suryakumar Yadav as Captain today! Let's win the Mega Contest! 🏏</span>
+              </div>
+            </div>
+            <div class="lcb-input-wrap">
+              <input type="text" id="input-chat-send" placeholder="Type a message or cheer..." maxlength="120">
+              <button id="btn-chat-send" class="btn-chat-send">Send 🚀</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= VIEW: WINNERS (Dream11 Authentic) ================= -->
+        <section id="view-winners" class="app-view">
+          <div class="section-header-simple">
+            <h3>Dream11 Winners & Hall of Fame</h3>
+            <p>Every match creates new Crorepatis. You could be next!</p>
+          </div>
+
+          <!-- Featured Mega Crorepati Hero Card -->
+          <div class="winner-hero-card">
+            <div class="whc-badge">👑 MEGA CONTEST CROREPATI</div>
+            <div class="whc-profile">
+              <div class="whc-avatar-ring">
+                <div class="whc-avatar">🏏</div>
+                <div class="whc-crown">👑</div>
+              </div>
+              <div class="whc-info">
+                <h4>Ramesh Patel</h4>
+                <span class="whc-city">Surat, Gujarat</span>
+                <div class="whc-prize-pill">WON ₹2,00,00,000</div>
+              </div>
+            </div>
+            <div class="whc-match-meta">
+              <div class="whc-meta-item">
+                <span>MATCH</span>
+                <strong>CSK vs GT (Final)</strong>
+              </div>
+              <div class="whc-meta-item">
+                <span>FANTASY POINTS</span>
+                <strong>942.5 Pts (Rank #1)</strong>
+              </div>
+              <div class="whc-meta-item">
+                <span>ENTRY</span>
+                <strong>₹49</strong>
+              </div>
+            </div>
+            <div class="whc-quote">
+              "Dream11 completely transformed my life. I backed Shivam Dube as Captain and he scored 78 runs with 3 sixes!"
+            </div>
+          </div>
+
+          <!-- Mega Winners Wall -->
+          <div class="winners-section-title">
+            <h4>Recent Mega Contest Winners</h4>
+            <span class="verified-tag">✓ 100% Verified by Bank IMPS</span>
+          </div>
+
+          <div class="winners-grid">
+            <div class="winner-mini-card">
+              <div class="wmc-top">
+                <div class="wmc-avatar">👤</div>
+                <div>
+                  <strong>Sunita Devi</strong>
+                  <span>Patna, Bihar</span>
+                </div>
+              </div>
+              <div class="wmc-amount">₹1,50,00,000</div>
+              <div class="wmc-match">MI vs RCB • 912 Pts</div>
+            </div>
+
+            <div class="winner-mini-card">
+              <div class="wmc-top">
+                <div class="wmc-avatar">👤</div>
+                <div>
+                  <strong>Amit Verma</strong>
+                  <span>Jaipur, Rajasthan</span>
+                </div>
+              </div>
+              <div class="wmc-amount">₹1,00,00,000</div>
+              <div class="wmc-match">IND vs AUS • 888 Pts</div>
+            </div>
+
+            <div class="winner-mini-card">
+              <div class="wmc-top">
+                <div class="wmc-avatar">👤</div>
+                <div>
+                  <strong>Mohammed Rafi</strong>
+                  <span>Hyderabad, Telangana</span>
+                </div>
+              </div>
+              <div class="wmc-amount">₹1,00,00,000</div>
+              <div class="wmc-match">KKR vs RR • 876 Pts</div>
+            </div>
+          </div>
+
+          <!-- Daily Leaderboard Podium -->
+          <div class="podium-card">
+            <div class="podium-header">
+              <h4>Today's Top Rankers</h4>
+              <span>Updated Real-Time</span>
+            </div>
+            <div class="podium-list">
+              <div class="podium-item rank-1">
+                <div class="podium-rank">🥇 #1</div>
+                <div class="podium-user">
+                  <strong>@cricket_guru_99</strong>
+                  <span>902.5 Pts</span>
+                </div>
+                <div class="podium-reward">₹2,00,00,000</div>
+              </div>
+              <div class="podium-item rank-2">
+                <div class="podium-rank">🥈 #2</div>
+                <div class="podium-user">
+                  <strong>@mumbai_king_7</strong>
+                  <span>891.0 Pts</span>
+                </div>
+                <div class="podium-reward">₹50,00,000</div>
+              </div>
+              <div class="podium-item rank-3">
+                <div class="podium-rank">🥉 #3</div>
+                <div class="podium-user">
+                  <strong>@dhoni_fan_forever</strong>
+                  <span>884.5 Pts</span>
+                </div>
+                <div class="podium-reward">₹25,00,000</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<section id="view-profile" class="app-view">
+          <div class="profile-hero">
+            <div class="profile-avatar-large">🏏</div>
+            <h3 id="profile-name">Dream Champion</h3>
+            <span class="user-handle" id="profile-handle">@champion_xi</span>
+            <div class="level-pill">Level 34 • Pro Champion</div>
+          </div>
+
+          <div class="profile-stats-grid">
+            <div class="pstat-card">
+              <span class="pstat-val" id="pstat-matches">42</span>
+              <span class="pstat-label">Matches Played</span>
+            </div>
+            <div class="pstat-card">
+              <span class="pstat-val" id="pstat-contests">27</span>
+              <span class="pstat-label">Contests Won</span>
+            </div>
+            <div class="pstat-card">
+              <span class="pstat-val" id="pstat-winrate">64.3%</span>
+              <span class="pstat-label">Win Rate</span>
+            </div>
+            <div class="pstat-card highlight">
+              <span class="pstat-val" id="pstat-winnings">₹18,450</span>
+              <span class="pstat-label">Total Winnings</span>
+            </div>
+          </div>
+
+          <div class="profile-actions-list">
+
+            <div class="profile-menu-item" id="menu-item-wallet">
+              <span>💰 My Balance & Transactions</span>
+              <strong>›</strong>
+            </div>
+            <div class="profile-menu-item" id="menu-item-rules">
+              <span>📖 Fantasy Cricket Rules</span>
+              <strong>›</strong>
+            </div>
+            <div class="profile-menu-item" id="menu-item-help">
+              <span>🛡️ 100% Legal & Safe Play Guide</span>
+              <strong>›</strong>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Sticky Bottom Navigation Bar (Exact 5 Dream11 Menu Items) -->
+      <footer class="app-bottom-nav">
+        <button class="nav-item active" data-target="view-home">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item" data-target="view-my-matches">
+          <span class="nav-icon">🏆</span>
+          <span class="nav-label">My Matches</span>
+          <span class="nav-badge" id="nav-joined-badge" style="display:none">1</span>
+        </button>
+        <button class="nav-item" data-target="view-rewards">
+          <span class="nav-icon">🎁</span>
+          <span class="nav-label">Rewards</span>
+        </button>
+        <button class="nav-item" data-target="view-chat-groups">
+          <span class="nav-icon">💬</span>
+          <span class="nav-label">Chat</span>
+        </button>
+        <button class="nav-item" data-target="view-winners">
+          <span class="nav-icon">🥇</span>
+          <span class="nav-label">Winners</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. 2D CRICKET PITCH PREVIEW MODAL -->
+  <div class="modal-overlay hidden" id="modal-pitch-preview">
+    <div class="modal-pitch-container">
+      <div class="pitch-modal-header">
+        <button class="pitch-close-btn" id="btn-close-pitch">✕</button>
+        <div class="pitch-header-title">
+          <h4 id="pitch-team-name-title">Team 1 Preview</h4>
+          <span class="pitch-sub-info" id="pitch-summary-subtitle">IND: 6 • AUS: 5 • Credits: 98.5</span>
+        </div>
+        <button class="pitch-edit-btn" id="btn-edit-from-pitch">✎ Edit</button>
+      </div>
+
+      <!-- Realistic Grass Cricket Pitch Field -->
+            <!-- Dynamic 2D Pitch Field Container -->
+      <div id="dynamic-pitch-wrapper" style="flex:1; display:flex; flex-direction:column; overflow:hidden">
+        <!-- 1. Cricket Pitch Field -->
+        <div id="pitch-field-cricket" class="cricket-pitch-field">
+          <div class="pitch-grass-texture"></div>
+          <div class="field-boundary-ring"></div>
+          <div class="inner-circle-ring"></div>
+          <div class="pitch-strip">
+            <div class="bowling-crease top"></div>
+            <div class="stumps top"></div>
+            <div class="pitch-center-strip"></div>
+            <div class="stumps bottom"></div>
+            <div class="batting-crease bottom"></div>
+          </div>
+
+          <div class="field-players-overlay">
+            <div class="pitch-row" id="pitch-row-wk">
+              <div class="pitch-row-label">WICKET-KEEPERS</div>
+              <div class="pitch-row-players" id="pitch-players-wk"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-bat">
+              <div class="pitch-row-label">BATSMEN</div>
+              <div class="pitch-row-players" id="pitch-players-bat"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-ar">
+              <div class="pitch-row-label">ALL-ROUNDERS</div>
+              <div class="pitch-row-players" id="pitch-players-ar"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-bowl">
+              <div class="pitch-row-label">BOWLERS</div>
+              <div class="pitch-row-players" id="pitch-players-bowl"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Football 2D Pitch Field -->
+        <div id="pitch-field-football" class="football-pitch-field hidden">
+          <div class="football-center-line"></div>
+          <div class="football-center-circle"></div>
+          <div class="football-penalty-area top"></div>
+          <div class="football-penalty-area bottom"></div>
+
+          <div class="field-players-overlay">
+            <div class="pitch-row" id="pitch-row-gk">
+              <div class="pitch-row-label">GOALKEEPER (GK)</div>
+              <div class="pitch-row-players" id="pitch-players-gk"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-def">
+              <div class="pitch-row-label">DEFENDERS (DEF)</div>
+              <div class="pitch-row-players" id="pitch-players-def"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-mid">
+              <div class="pitch-row-label">MIDFIELDERS (MID)</div>
+              <div class="pitch-row-players" id="pitch-players-mid"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-fwd">
+              <div class="pitch-row-label">FORWARDS (FWD)</div>
+              <div class="pitch-row-players" id="pitch-players-fwd"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Kabaddi 2D Mat Field -->
+        <div id="pitch-field-kabaddi" class="kabaddi-pitch-field hidden">
+          <div class="kabaddi-midline"></div>
+          <div class="kabaddi-baulk-line top"></div>
+          <div class="kabaddi-baulk-line bottom"></div>
+          <div class="kabaddi-bonus-line top"></div>
+          <div class="kabaddi-bonus-line bottom"></div>
+          <div class="kabaddi-lobby left"></div>
+          <div class="kabaddi-lobby right"></div>
+
+          <div class="field-players-overlay">
+            <div class="pitch-row" id="pitch-row-kdef">
+              <div class="pitch-row-label">DEFENDERS (DEF)</div>
+              <div class="pitch-row-players" id="pitch-players-kdef"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-kall">
+              <div class="pitch-row-label">ALL-ROUNDERS (ALL)</div>
+              <div class="pitch-row-players" id="pitch-players-kall"></div>
+            </div>
+            <div class="pitch-row" id="pitch-row-krai">
+              <div class="pitch-row-label">RAIDERS (RAI)</div>
+              <div class="pitch-row-players" id="pitch-players-krai"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. PRIZE BREAKUP MODAL -->
+  <div class="modal-overlay hidden" id="modal-prize-breakup">
+    <div class="bottom-sheet-modal">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div>
+          <h4 id="pb-contest-name">Mega Contest</h4>
+          <span class="pb-pool-tag" id="pb-total-prize">Prize Pool: ₹50 Crores</span>
+        </div>
+        <button class="sheet-close-btn" id="btn-close-breakup">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="pb-stats-bar">
+          <div><span class="label">Entry</span><strong id="pb-entry-fee">₹49</strong></div>
+          <div><span class="label">Total Spots</span><strong id="pb-total-spots">10,00,000</strong></div>
+          <div><span class="label">Winners</span><strong id="pb-winners">65%</strong></div>
+        </div>
+        <h5 class="pb-title">Guaranteed Prize Distribution Table</h5>
+        <div class="pb-table" id="pb-table-rows">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. JOIN CONTEST CONFIRMATION MODAL -->
+  <div class="modal-overlay hidden" id="modal-join-contest">
+    <div class="bottom-sheet-modal">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h4>Confirm Contest Entry</h4>
+        <button class="sheet-close-btn" id="btn-close-join">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="join-contest-summary" id="join-contest-summary-box">
+          <!-- Filled by app.js -->
+        </div>
+
+        <div class="team-picker-section">
+          <label class="form-label">Select Your Fantasy Team to Join With:</label>
+          <div class="team-picker-list" id="join-team-picker-list">
+            <!-- Radio options of created teams -->
+          </div>
+        </div>
+
+        <div class="payment-breakdown-box">
+          <div class="pay-row">
+            <span>Entry Fee</span>
+            <strong id="pay-entry-fee">₹49</strong>
+          </div>
+          <div class="pay-row discount">
+            <span>Cash Bonus Applied (20%)</span>
+            <strong id="pay-bonus-deduct">-₹10</strong>
+          </div>
+          <div class="pay-row total">
+            <span>To Pay from Deposit</span>
+            <strong id="pay-final-amount">₹39</strong>
+          </div>
+        </div>
+
+        <button class="btn-join-pay-now" id="btn-confirm-pay-join">
+          PAY & JOIN CONTEST ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. WALLET, UPI GATEWAY & PASSBOOK MODAL -->
+  <div class="modal-overlay hidden" id="modal-wallet">
+    <div class="bottom-sheet-modal wallet-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h4>My Fantasy11 Wallet</h4>
+        <button class="sheet-close-btn" id="btn-close-wallet">✕</button>
+      </div>
+      <div class="sheet-body">
+        
+        <!-- Wallet Navigation Tabs -->
+        <div class="wallet-nav-tabs">
+          <button class="w-nav-tab active" data-wtab="deposit">💳 Add Cash</button>
+          <button class="w-nav-tab" data-wtab="withdraw">🏦 Withdraw</button>
+          <button class="w-nav-tab" data-wtab="passbook">📜 Passbook</button>
+        </div>
+
+        <!-- TAB 1: ADD CASH / UPI DEPOSIT -->
+        <div class="w-tab-content" id="wtab-deposit">
+          <div class="wallet-balance-card">
+            <span class="w-label">TOTAL BALANCE</span>
+            <h2 id="modal-total-balance">₹1,500</h2>
+          </div>
+
+          <div class="wallet-breakdown-grid">
+            <div class="w-break-item">
+              <span class="w-type">Deposited Cash</span>
+              <strong id="w-deposited">₹500</strong>
+              <span class="w-hint">Usable in all contests</span>
+            </div>
+            <div class="w-break-item">
+              <span class="w-type">Winnings</span>
+              <strong id="w-winnings">₹650</strong>
+              <button class="btn-withdraw-small" id="btn-quick-goto-withdraw">Withdraw</button>
+            </div>
+            <div class="w-break-item full">
+              <span class="w-type">Cash Bonus</span>
+              <strong id="w-bonus">₹350</strong>
+              <span class="w-hint">Max 20% usable per contest</span>
+            </div>
+          </div>
+
+          <div class="add-cash-section">
+            <h5>Select Deposit Amount</h5>
+            <div class="quick-amounts-bar">
+              <button class="btn-amt" data-amt="50">+ ₹50</button>
+              <button class="btn-amt active" data-amt="100">+ ₹100</button>
+              <button class="btn-amt" data-amt="250">+ ₹250</button>
+              <button class="btn-amt" data-amt="500">+ ₹500</button>
+            </div>
+            <div class="custom-amt-row">
+              <span class="currency-prefix">₹</span>
+              <input type="number" id="input-custom-deposit-amt" value="100" min="10" max="50000" placeholder="Enter custom amount">
+            </div>
+
+            <h5 style="margin-top:14px">Select UPI Payment Method</h5>
+            <div class="upi-methods-grid">
+              <div class="upi-method-card selected" data-method="gpay">
+                <div class="upi-app-icon gpay">GPay</div>
+                <div class="upi-app-name">Google Pay</div>
+                <span class="upi-fast-badge">INSTANT</span>
+              </div>
+              <div class="upi-method-card" data-method="phonepe">
+                <div class="upi-app-icon phonepe">Pe</div>
+                <div class="upi-app-name">PhonePe</div>
+                <span class="upi-fast-badge">POPULAR</span>
+              </div>
+              <div class="upi-method-card" data-method="paytm">
+                <div class="upi-app-icon paytm">Paytm</div>
+                <div class="upi-app-name">Paytm UPI</div>
+              </div>
+              <div class="upi-method-card" data-method="qr">
+                <div class="upi-app-icon qr">🔳</div>
+                <div class="upi-app-name">Scan QR Code</div>
+              </div>
+            </div>
+
+            <!-- Dynamic QR Code Container (Visible when QR selected) -->
+            <div id="upi-qr-container" class="upi-qr-panel hidden">
+              <div class="qr-box">
+                <svg class="qr-svg" viewBox="0 0 160 160" width="140" height="140">
+                  <rect width="160" height="160" fill="#ffffff"/>
+                  <rect x="10" y="10" width="40" height="40" fill="#0f172a"/>
+                  <rect x="18" y="18" width="24" height="24" fill="#ffffff"/>
+                  <rect x="24" y="24" width="12" height="12" fill="#0f172a"/>
+                  <rect x="110" y="10" width="40" height="40" fill="#0f172a"/>
+                  <rect x="118" y="18" width="24" height="24" fill="#ffffff"/>
+                  <rect x="124" y="24" width="12" height="12" fill="#0f172a"/>
+                  <rect x="10" y="110" width="40" height="40" fill="#0f172a"/>
+                  <rect x="18" y="118" width="24" height="24" fill="#ffffff"/>
+                  <rect x="24" y="124" width="12" height="12" fill="#0f172a"/>
+                  <rect x="60" y="20" width="10" height="10" fill="#D11A2A"/>
+                  <rect x="80" y="15" width="15" height="10" fill="#0f172a"/>
+                  <rect x="70" y="35" width="15" height="15" fill="#0f172a"/>
+                  <rect x="20" y="65" width="15" height="10" fill="#0f172a"/>
+                  <rect x="45" y="70" width="10" height="20" fill="#D11A2A"/>
+                  <rect x="65" y="65" width="30" height="30" fill="#D11A2A" rx="6"/>
+                  <text x="80" y="86" font-size="16" font-weight="bold" fill="white" text-anchor="middle">F</text>
+                  <rect x="105" y="70" width="15" height="15" fill="#0f172a"/>
+                  <rect x="130" y="60" width="10" height="20" fill="#0f172a"/>
+                  <rect x="60" y="115" width="20" height="10" fill="#0f172a"/>
+                  <rect x="90" y="110" width="10" height="20" fill="#0f172a"/>
+                  <rect x="110" y="115" width="20" height="15" fill="#0f172a"/>
+                  <rect x="135" y="135" width="15" height="15" fill="#D11A2A"/>
+                </svg>
+              </div>
+              <div class="qr-meta">
+                <strong>Scan with Any UPI App</strong>
+                <p style="font-size:11px; color:var(--text-muted); margin:2px 0 6px">Google Pay, PhonePe, Paytm or BHIM</p>
+                <span class="upi-id-pill" id="qr-upi-id-text">fantasy11.pay@icici</span>
+              </div>
+            </div>
+
+            <button class="btn-primary" id="btn-submit-add-cash" style="width:100%; margin-top:14px; padding:14px; font-size:14px; font-weight:900">
+              PAY ₹100 VIA UPI →
+            </button>
+            <div style="text-align:center; font-size:10px; color:var(--text-muted); margin-top:8px">
+              🔒 256-Bit SSL Encrypted • Powered by NPCI UPI Gateway
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: WITHDRAW WINNINGS -->
+        <div class="w-tab-content hidden" id="wtab-withdraw">
+          <div class="withdraw-hero-card">
+            <span class="wh-label">WITHDRAWABLE WINNINGS</span>
+            <h2 id="wh-winnings-amount">₹650</h2>
+            <div class="wh-badge">⚡ Instant 24x7 IMPS Payout • Zero Withdrawal Fee</div>
+          </div>
+
+          <div class="admin-form" style="margin-top:14px">
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; align-items:center">
+                <label>Withdrawal Amount (₹)</label>
+                <button type="button" class="btn-link-all" id="btn-withdraw-max">Withdraw All</button>
+              </div>
+              <input type="number" id="input-withdraw-amount" value="200" min="50" placeholder="Min ₹50">
+              <span style="font-size:10px; color:var(--text-muted); margin-top:2px">Min: ₹50 • Max: Available Winnings</span>
+            </div>
+
+            <div class="form-group" style="margin-top:10px">
+              <label>Select Transfer Destination</label>
+              <div class="payout-modes-row">
+                <label class="payout-mode-opt selected">
+                  <input type="radio" name="payout-mode" value="upi" checked>
+                  <span>⚡ Instant UPI VPA</span>
+                </label>
+                <label class="payout-mode-opt">
+                  <input type="radio" name="payout-mode" value="bank">
+                  <span>🏦 Bank Account (IMPS)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- UPI Destination Field -->
+            <div id="payout-field-upi" class="payout-fields-box">
+              <div class="form-group">
+                <label>Enter UPI ID / VPA</label>
+                <input type="text" id="input-payout-upi" value="champion@okhdfcbank" placeholder="e.g. yourname@oksbi">
+              </div>
+            </div>
+
+            <!-- Bank Destination Fields -->
+            <div id="payout-field-bank" class="payout-fields-box hidden">
+              <div class="form-group">
+                <label>Bank Account Number</label>
+                <input type="text" id="input-payout-acc" value="987654321012" placeholder="Account Number">
+              </div>
+              <div class="form-group">
+                <label>IFSC Code</label>
+                <input type="text" id="input-payout-ifsc" value="HDFC0001234" placeholder="e.g. HDFC0001234">
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary" id="btn-submit-withdraw-request" style="width:100%; margin-top:14px; background:#16a34a">
+              🔒 VERIFY & WITHDRAW NOW →
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 3: PASSBOOK STATEMENT -->
+        <div class="w-tab-content hidden" id="wtab-passbook">
+          <div class="passbook-header-row">
+            <div>
+              <h5 style="font-size:13px; font-weight:800">Account Passbook</h5>
+              <span style="font-size:11px; color:var(--text-muted)">Detailed ledger of all credits & debits</span>
+            </div>
+            <button class="btn-refresh-small" id="btn-refresh-passbook">🔄 Refresh</button>
+          </div>
+
+          <!-- Passbook Filter Chips -->
+          <div class="passbook-filters">
+            <button class="pb-filter active" data-filter="all">All</button>
+            <button class="pb-filter" data-filter="deposit">Deposits (+)</button>
+            <button class="pb-filter" data-filter="withdrawal">Withdrawals (-)</button>
+            <button class="pb-filter" data-filter="contest">Contests (-)</button>
+            <button class="pb-filter" data-filter="winning">Winnings (+)</button>
+          </div>
+
+          <!-- Transactions Ledger List -->
+          <div class="passbook-items-list" id="passbook-list"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. CREATE PRIVATE CONTEST MODAL -->
+  <div class="modal-overlay hidden" id="modal-create-private-contest">
+    <div class="bottom-sheet-modal">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h4>Create Private Contest</h4>
+        <button class="sheet-close-btn" id="btn-close-create-private">✕</button>
+      </div>
+      <div class="sheet-body">
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px">
+          Challenge friends, colleagues or family. Get an exclusive invite code to share on WhatsApp or Telegram!
+        </p>
+        <form id="form-create-private-contest" class="admin-form">
+          <div class="form-group">
+            <label>Contest Name</label>
+            <input type="text" id="pc-name" required value="Champs League with Friends" placeholder="e.g. Hostels Derby">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Total Spots</label>
+              <select id="pc-spots">
+                <option value="2">2 (Head to Head)</option>
+                <option value="5">5 Spots</option>
+                <option value="10" selected>10 Spots</option>
+                <option value="25">25 Spots</option>
+                <option value="50">50 Spots</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Entry Fee (₹)</label>
+              <input type="number" id="pc-fee" required value="50" min="5" max="5000">
+            </div>
+          </div>
+          <div class="pc-calc-summary">
+            <div class="pc-calc-item">
+              <span>Total Prize:</span>
+              <strong id="pc-calc-total" style="color:#16a34a">₹500</strong>
+            </div>
+            <div class="pc-calc-item">
+              <span>1st Prize:</span>
+              <strong id="pc-calc-1st" style="color:var(--gold)">₹300</strong>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px">
+            <label>Select Your Team to Play With:</label>
+            <div class="team-picker-list" id="pc-team-picker"></div>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%; margin-top:10px">
+            🚀 CREATE & GET INVITE CODE
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. PRIVATE CONTEST SHARE MODAL -->
+  <div class="modal-overlay hidden" id="modal-private-code-share">
+    <div class="bottom-sheet-modal" style="text-align:center">
+      <div class="sheet-handle"></div>
+      <div style="font-size:44px; margin-bottom:8px">🎉</div>
+      <h4 style="font-size:18px; font-weight:900">Private Contest Created!</h4>
+      <p style="font-size:12px; color:var(--text-muted); margin:4px 0 16px">
+        Share this 6-character invite code with your friends to let them join:
+      </p>
+      <div class="share-code-box">
+        <span class="share-code-text" id="share-modal-code">F11-882</span>
+        <button class="btn-copy-code" id="btn-copy-share-code">📋 Copy</button>
+      </div>
+      <div class="share-buttons-row">
+        <button class="btn-share-wa" id="btn-share-whatsapp">💬 Share via WhatsApp</button>
+        <button class="btn-secondary" id="btn-done-share" style="width:100px">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. JOIN PRIVATE CONTEST MODAL -->
+  <div class="modal-overlay hidden" id="modal-join-private">
+    <div class="bottom-sheet-modal">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h4>Join Private Contest</h4>
+        <button class="sheet-close-btn" id="btn-close-join-private">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="join-private-card" id="join-private-details-box"></div>
+        <div class="form-group" style="margin-top:12px">
+          <label class="form-label">Select Your Fantasy Team to Join With:</label>
+          <div class="team-picker-list" id="join-private-team-picker"></div>
+        </div>
+        <div class="payment-breakdown-box">
+          <div class="pay-row">
+            <span>Entry Fee</span>
+            <strong id="jp-entry-fee">₹50</strong>
+          </div>
+          <div class="pay-row total">
+            <span>To Pay</span>
+            <strong id="jp-final-pay">₹50</strong>
+          </div>
+        </div>
+        <button class="btn-join-pay-now" id="btn-confirm-join-private">
+          PAY & JOIN PRIVATE LEAGUE ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+    <!-- 8. SIMULATED PAYMENT GATEWAY PROCESSING MODAL -->
+  <div class="modal-overlay hidden" id="modal-payment-gateway">
+    <div class="bottom-sheet-modal" style="text-align:center; padding:24px 20px">
+      <!-- State 1: Processing -->
+      <div id="pg-state-processing">
+        <div class="gateway-spinner-wrap">
+          <div class="gateway-spinner"></div>
+          <div class="gateway-center-icon">🔒</div>
+        </div>
+        <h4 style="font-size:17px; font-weight:900; margin-top:16px" id="pg-processing-title">Connecting to Bank UPI Gateway...</h4>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:6px" id="pg-processing-desc">Authenticating transaction with NPCI & HDFC Bank servers</p>
+        <div class="gateway-bank-pills">
+          <span class="gb-pill">GPay</span>
+          <span class="gb-pill">PhonePe</span>
+          <span class="gb-pill">NPCI UPI</span>
+        </div>
+      </div>
+
+      <!-- State 2: Success -->
+      <div id="pg-state-success" class="hidden">
+        <div class="success-tick-wrap">
+          <div class="success-circle">✓</div>
+        </div>
+        <h4 style="font-size:20px; font-weight:900; color:#15803d; margin-top:14px">Payment Successful!</h4>
+        <h2 style="font-size:28px; font-weight:900; margin-top:4px" id="pg-success-amount">₹100</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:4px">Credited to your Fantasy11 Deposited Balance</p>
+        <div class="pg-utr-box">
+          <span>Transaction UTR:</span>
+          <strong id="pg-success-utr">UPI/428901824901</strong>
+        </div>
+        <button class="btn-primary" id="btn-pg-done" style="width:100%; margin-top:16px">
+          CONTINUE PLAYING ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. SIMULATED BANK SECURITY OTP MODAL -->
+  <div class="modal-overlay hidden" id="modal-bank-otp">
+    <div class="bottom-sheet-modal" style="padding:20px">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h4>Bank Security Verification</h4>
+        <button class="sheet-close-btn" id="btn-close-bank-otp">✕</button>
+      </div>
+      <div class="sheet-body">
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px">
+          Enter the 6-digit Bank Security OTP dispatched to your registered mobile <strong>+91 98*** **420</strong> to authenticate IMPS withdrawal:
+        </p>
+
+        <!-- 6-Box Auto-Advance Fintech Input -->
+        <div class="otp-six-boxes-wrapper" id="otp-six-boxes">
+          <input type="tel" inputmode="numeric" maxlength="1" class="otp-box" data-idx="0" autocomplete="off" autofocus>
+          <input type="tel" inputmode="numeric" maxlength="1" class="otp-box" data-idx="1" autocomplete="off">
+          <input type="tel" inputmode="numeric" maxlength="1" class="otp-box" data-idx="2" autocomplete="off">
+          <input type="tel" inputmode="numeric" maxlength="1" class="otp-box" data-idx="3" autocomplete="off">
+          <input type="tel" inputmode="numeric" maxlength="1" class="otp-box" data-idx="4" autocomplete="off">
+          <input type="tel" inputmode="numeric" maxlength="1" class="otp-box" data-idx="5" autocomplete="off">
+        </div>
+
+        <div class="otp-timer-action-row">
+          <span class="otp-countdown-text" id="otp-timer-status">Resend code in <strong id="otp-timer-seconds">00:59</strong></span>
+          <button type="button" class="btn-link-all hidden" id="btn-resend-otp">🔄 Resend OTP</button>
+          <button type="button" class="btn-link-all" id="btn-autofill-otp">⚡ Auto-Fill Code</button>
+        </div>
+
+        <button type="button" class="btn-primary" id="btn-confirm-otp-withdraw" style="width:100%; margin-top:16px; background:#16a34a">
+          AUTHORIZE IMPS TRANSFER ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. FORMAL IMPS WITHDRAWAL RECEIPT MODAL -->
+  <div class="modal-overlay hidden" id="modal-withdrawal-receipt">
+    <div class="bottom-sheet-modal" style="padding:20px">
+      <div class="sheet-handle"></div>
+      <div class="receipt-card">
+        <div class="receipt-top-banner">
+          <span class="rc-badge">IMPS Payout</span>
+          <div class="rc-icon">✓</div>
+          <h4>Transfer Successful!</h4>
+          <h2 id="rc-amount">₹200</h2>
+        </div>
+        <div class="receipt-details">
+          <div class="rc-row">
+            <span>Transfer Type:</span>
+            <strong>Immediate Payment Service (IMPS)</strong>
+          </div>
+          <div class="rc-row">
+            <span>Reference UTR:</span>
+            <strong id="rc-utr" style="color:var(--primary)">IMPS8910248921</strong>
+          </div>
+          <div class="rc-row">
+            <span>Beneficiary:</span>
+            <strong id="rc-dest">champion@okhdfcbank</strong>
+          </div>
+          <div class="rc-row">
+            <span>Date & Time:</span>
+            <strong id="rc-time">Just now</strong>
+          </div>
+          <div class="rc-row">
+            <span>Status:</span>
+            <strong style="color:#15803d">PROCESSED (Zero Fees)</strong>
+          </div>
+        </div>
+        <div class="receipt-footer-stamp">
+          <span>🛡️ Verified by Reserve Bank of India (RBI) / NPCI Network</span>
+        </div>
+      </div>
+      <button class="btn-primary" id="btn-close-receipt" style="width:100%; margin-top:14px">
+        DONE ✓
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="mock.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
